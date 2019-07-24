@@ -116,6 +116,9 @@ public class WebSocketServer {
     }
 
     public static synchronized void subOnlineCount() {
-        WebSocketServer.onlineCount--;
+        if (onlineCount > 0){
+            WebSocketServer.onlineCount--;
+        }
+
     }
 }

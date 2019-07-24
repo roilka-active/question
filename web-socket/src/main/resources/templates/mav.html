@@ -1,15 +1,17 @@
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <h2 id = "counter">当前连接数目为</h2>
+<input type="hidden" th:value="${cid}" id ="cid">
+<input type="hidden"  id ="message">
 <script>
     var socket;
-    var id='${cid}';    // 通过'${cid}'来取得前端传来的cid值
+    var id=document.getElementById("cid").value;    // 通过'${cid}'来取得前端传来的cid值
     if(typeof(WebSocket) == "undefined") {
         console.log("您的浏览器不支持WebSocket");
     }else {
         console.log("您的浏览器支持WebSocket");
         console.log("当前cid值为"+id)
         //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
-        socket = new WebSocket("ws://localhost:8843/websocket/" + id);    // 建立连接
+        socket = new WebSocket("ws://127.0.0.1:8080/websocket/" + id);    // 建立连接
         //打开事件
         socket.onopen = function () {
             console.log("Socket 已打开");
