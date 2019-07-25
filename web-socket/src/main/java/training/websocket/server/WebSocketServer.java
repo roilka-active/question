@@ -55,6 +55,7 @@ public class WebSocketServer {
         this.session = session;
         webSocketServerSet.add(this);
         logger.info("有新窗口开始监听：" + sid + "，当前在线人数为" + getOnlineCount());
+        addOnlineCount();
         this.sid = sid;
 
     }
@@ -75,6 +76,7 @@ public class WebSocketServer {
         for (WebSocketServer item : webSocketServerSet) {
             try {
                 item.sendMessage(message);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -88,6 +90,7 @@ public class WebSocketServer {
     }
 
     public void sendMessage(String message) throws IOException {
+
         this.session.getBasicRemote().sendText(message);
     }
 

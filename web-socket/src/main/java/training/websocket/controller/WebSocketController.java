@@ -14,6 +14,8 @@ package training.websocket.controller;/**
  * Modified By:
  */
 
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,12 +28,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2019/7/24
  */
 @Controller
-@RequestMapping("/usercounter")
+
 public class WebSocketController {
 
-    @GetMapping("/socket/{cid}")
+    @GetMapping("/usercounter/socket/{cid}")
     public String socket(Model model, @PathVariable("cid") String cid){
         model.addAttribute("cid",cid);
         return "mav";
     }
+
+    @SendTo("socketTo")
+    public  String sendTo(){
+        return "sd";
+    }
+
 }

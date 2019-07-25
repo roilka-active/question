@@ -29,4 +29,9 @@ public class IndexController {
     public String index(){
         return "index";
     }
+
+    @GetMapping("/websocket")
+    public String initWebSocket(){
+        return "websocket";
+    }
 }
