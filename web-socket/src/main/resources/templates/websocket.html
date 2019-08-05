@@ -80,10 +80,10 @@
                 try {
                     if ("WebSocket" in window) {
                         ws = new WebSocket(
-                            'ws://172.16.17.9:8080/webSocketRo/INFO=' +info);
+                            'ws://127.0.0.1:8080/webSocketRo/INFO=' +info);
                     } else if ("MozWebSocket" in window) {
                         ws = new MozWebSocket(
-                            'ws://172.16.17.9:8080/webSocketRo/INFO='+info );
+                            'ws://127.0.0.1:8080/webSocketRo/INFO='+info );
                     }
                     SocketCreated = true;
                     isUserloggedout = false;
@@ -151,6 +151,7 @@
             var WebSocketsExist = true;
             try {
                 var dummy = new WebSocket("ws://localhost:8989/test");
+                console.log("我初始化了");
             } catch (ex) {
                 try {
                     webSocket = new MozWebSocket("ws://localhost:8989/test");

@@ -3,4 +3,4 @@
 - websocket
 
 - tools
-  - 敏感词过滤
+  - filter 敏感词过滤

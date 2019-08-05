@@ -23,6 +23,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(new MyHandler(), "/webSocketRo/{INFO}").setAllowedOrigins("*")
-                .addInterceptors(new WebSocketInterceptor()).withSockJS();
+                .addInterceptors(new WebSocketInterceptor());
     }
 }

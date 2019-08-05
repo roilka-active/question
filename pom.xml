@@ -9,6 +9,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <packaging>pom</packaging>
+
 <dependencies>
   <dependency>
     <groupId>roilka-training</groupId>
@@ -23,9 +24,7 @@
 </dependencies>
 
   <modules>
-    <module>web-socket</module>
     <module>tools</module>
-
+    <module>web-socket</module>
   </modules>
-
 </project>

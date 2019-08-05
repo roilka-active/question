@@ -2,6 +2,7 @@ package training.websocket.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.socket.*;
+import training.tools.filter.FilterTest;
 import training.websocket.entity.Message;
 import training.websocket.entity.MessageKey;
 
@@ -9,11 +10,13 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Filter;
 
 public class MyHandler implements WebSocketHandler {
 
     private static final Map<String, Map<String, WebSocketSession>> sUserMap = new HashMap<>(3);
 
+    private static volatile FilterTest filterTest = new FilterTest();
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         System.out.println("成功建立连接");
@@ -51,6 +54,8 @@ public class MyHandler implements WebSocketHandler {
                         sendMessageToRoomUsers(message.getRoomId(), new TextMessage("【" + getNameFromSession(webSocketSession) + "】加入了房间，欢迎！"));
                         break;
                     case MessageKey.MESSAGE_COMMAND:
+                        String content = message.getInfo();
+                        content = filterTest.filterKeyWord(message.getInfo());
                         if (message.getName().equals("all")) {
                             sendMessageToRoomUsers(message.getRoomId(), new TextMessage(getNameFromSession(webSocketSession) +
                                     "说：" + message.getInfo()
@@ -146,6 +151,15 @@ public class MyHandler implements WebSocketHandler {
         }
     }
 
+    private String filter(){
+
+        try {
+           return filterTest.filterKeyWord("fdsf张梅颖");
+        }catch (Exception e){
+            System.out.println("出错了");
+        }
+        return "";
+    }
     /**
      *  断开连接后触发的回调
      * @param webSocketSession

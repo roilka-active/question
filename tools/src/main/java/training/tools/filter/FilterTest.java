@@ -50,8 +50,8 @@ public class FilterTest {
         }
         length = content.length();
         say.info(String.format("待过滤文本共 %d 行，%d 个字符。", testSuit.size(), length));*/
-        String text = "就开始的恢复健康合肥会蒲团计拉萨的回复ID是很过分的抗衰老换个房间都是法规的数量和热内割发代首高科技反倒是股份第三个号发快递";
-        testSuit.add(text);
+        //String text = "就开始的恢复健康合肥会蒲团计拉萨的回复ID是很过分的抗衰老换个房间都是法规的数量和热内割发代首高科技反倒是股份第三个号发快递";
+        testSuit.add(content);
         SensitiveFilter filter = SensitiveFilter.DEFAULT;
         //自定义添加过滤字符配置文件中输入 用英文  ; 隔开(业务需要自定义过滤词汇)
 		/*SystemConfService confService = new SystemConfService();

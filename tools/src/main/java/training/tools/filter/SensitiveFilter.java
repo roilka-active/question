@@ -14,6 +14,11 @@ package training.tools.filter;/**
  * Modified By:
  */
 
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.NavigableSet;
@@ -23,16 +28,16 @@ import java.util.NavigableSet;
  * @description 敏感词过滤器，以过滤速度优化为主
  * @date 2019/7/31
  */
-public class SensitiveFilter implements Serializable {
+
+public class SensitiveFilter implements Serializable, CommandLineRunner {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 默认的单例，使用自带的敏感词库
      */
-    static InputStream in = SensitiveFilter.class.getClassLoader().getResourceAsStream("sensi_words.txt");
-    public static volatile SensitiveFilter DEFAULT = new SensitiveFilter(
-            new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8)));
+    static volatile InputStream in ;
+    public static volatile SensitiveFilter DEFAULT ;
 
     /**
      * 为2的n次方，考虑到敏感词大概在10k左右，
@@ -52,15 +57,16 @@ public class SensitiveFilter implements Serializable {
      * 构建一个空的filter
      */
     public SensitiveFilter() {
-
+      System.out.println("这个类初始化了");
     }
 
 
-    public void init() {
-
+    public static void init() {
+        System.out.println("开始初始化敏感词文本");
+            in = SensitiveFilter.class.getClassLoader().getResourceAsStream("sensi_words.txt");
             DEFAULT = new SensitiveFilter(
                     new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8)));
-
+        System.out.println("初始化敏感词文本完成");
     }
 
     /**
@@ -74,7 +80,6 @@ public class SensitiveFilter implements Serializable {
     public SensitiveFilter(BufferedReader reader) {
         try {
             for (String line = reader.readLine(); line != null; line = reader.readLine()) {
-                System.out.println(line);
                 put(line);
             }
             reader.close();
@@ -130,7 +135,7 @@ public class SensitiveFilter implements Serializable {
                 }
             }
         }
-        init();
+
         return true;
     }
 
@@ -237,4 +242,11 @@ public class SensitiveFilter implements Serializable {
     }
 
 
+    @Override
+    public void run(String[] args) throws Exception {
+        hello();
+    }
+    public void hello(){
+        System.out.println("项目又启动了，这次使用的是：继承 ApplicationRunner");
+    }
 }
