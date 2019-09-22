@@ -14,6 +14,7 @@ package training.websocket.controller;/**
  * Modified By:
  */
 
+import com.roilka.websocket.service.ExampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -37,6 +38,8 @@ public class WebSocketController {
 
     @Autowired
     private WebSocketServer webSocketServer;
+    @Autowired
+    private ExampleService  exampleService;
     @GetMapping("/usercounter/socket/{cid}")
     public String socket(Model model, @PathVariable("cid") String cid){
         model.addAttribute("cid",cid);
@@ -50,8 +53,8 @@ public class WebSocketController {
         return "mav";
     }
     @GetMapping("/send/{val}")
-    public  String send(@PathVariable("val") String val, HttpRequest httpRequest){
-
+    public  String send(@PathVariable("val") String val){
+        exampleService.wrap("反倒是第三方");
         return "";
     }
     @SendTo("socketTo")

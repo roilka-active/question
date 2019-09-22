@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>socket test</title>
+</head>
+<body>
+<!-- <script src="/iolib/socket.io.dev.js"></script> -->
+<!-- <script src="/iolib/crypto-js.js"></script> -->
+<script src="https://res.tuhu.cn/h5lib/socket.io.min.js"></script>
+<script src="https://res.tuhu.org/h5lib/crypto-js.min.js"></script>
+
+<script>
+    var webSocketEncryptKey = '4c07a49b9002191922b9edbbde37d332'
+    var webSocketPullUrl = '/shopChat'
+
+    var encryptData = CryptoJS.AES.encrypt(JSON.stringify({ userId: location.href.match(/userId=(\d+)/)[1] - 0 }), webSocketEncryptKey);
+    var socket = io(webSocketPullUrl, {
+        transports:    ['websocket'],
+        query: {
+            module:location.href.match(/module=(\w+)/)[1],
+            ua: navigator.userAgent,
+            encryptData: encryptData,
+            isCover: 0
+        }
+    });
+
+    socket.on("connect", () => {
+        console.log('connected');
+    });
+
+    socket.on("disconnect", data => {
+        console.log("disconnect");
+    });
+
+    socket.on("reconnect_attempt", data => {
+        console.log("reconnect_attempt", data);
+    });
+
+    socket.on('reconnect', () => {
+        socket.io.opts.transports = ['polling', 'websocket'];
+    console.log('reconnected');
+    });
+
+    socket.on("PushMessage", message => {
+        console.log('PushMessage', message)
+    })
+</script>
+</body>
+</html>

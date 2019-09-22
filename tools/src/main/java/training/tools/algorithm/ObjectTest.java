@@ -5,6 +5,12 @@ public class ObjectTest {
         Employee x = new Employee(2L);
         Employee y = new Employee(3L);
         swap(x, y);
+
+        Manager z = new Manager(2,4L);
+        Double s = 23D;
+        z.setSalary(23D);
+        z.getCurrent();
+        System.out.println("当前类是子类吗?"+ (z.getCurrent() instanceof  Manager));
     }
 
     public static void swap(Employee a, Employee b) {
