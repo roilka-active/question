@@ -56,4 +56,10 @@ public class Employee {
     public Employee getCurrent(){
         return this;
     }
+    @Override
+    public String toString() {
+        return getClass().getName()+"={" +
+                "code=" + code +
+                '}';
+    }
 }

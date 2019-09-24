@@ -1,5 +1,7 @@
 package training.tools.algorithm;
 
+import java.util.Arrays;
+
 public class ObjectTest {
     public static void main(String[] args) {
         Employee x = new Employee(2L);
@@ -11,12 +13,18 @@ public class ObjectTest {
         z.setSalary(23D);
         z.getCurrent();
         System.out.println("当前类是子类吗?"+ (z.getCurrent() instanceof  Manager));
+        Object a = null;
+        Object b = "章辉";
+        System.out.println(b.hashCode());
+        System.out.println(z);
+
     }
 
     public static void swap(Employee a, Employee b) {
         Employee temp = a;
         a = b;
         b = temp;
+        Employee c;
     }
 
     /**
