@@ -16,6 +16,9 @@ package training.tools.spring.ioc.humen;/**
 
 import training.tools.spring.ioc.car.Car;
 
+import javax.swing.*;
+import java.util.ArrayList;
+
 /**
  * @author zhanghui
  * @description
@@ -32,5 +35,8 @@ public class LiSi extends HumenWithCar {
         car.turnLeft();
         car.turnRight();
         car.stop();
+        System.out.println(attributes);
+        Object obj;
+        ArrayList arrayList;
     }
 }

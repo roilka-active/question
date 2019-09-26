@@ -1,10 +1,9 @@
-package training.tools.algorithm;
+package training.tools.javase;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-public class Employee {
-    private final Date date;
+public class Employee implements Cloneable{
+    private  final Date date;
     private Date hireDay;
     private double salary;
 
@@ -17,6 +16,7 @@ public class Employee {
         System.out.println("Employee is init!");
         this.salary = salary;
         this.date = new Date();
+        this.hireDay = new Date();
     }
     {
         code = 1;
@@ -60,6 +60,21 @@ public class Employee {
     public String toString() {
         return getClass().getName()+"={" +
                 "code=" + code +
+                "salary=" + salary +
+                "hireDay=" + hireDay +
                 '}';
+    }
+
+    public Employee clone() {
+
+        Employee cloned = null;
+        try {
+            cloned = (Employee) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+            //this won`t happen,since we are Cloneable
+        }
+        cloned.hireDay = (Date) hireDay.clone();
+        return cloned;
     }
 }

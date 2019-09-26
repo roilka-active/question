@@ -1,9 +1,13 @@
 package training.tools.algorithm;
 
+import training.tools.javase.Employee;
 import training.tools.utils.StringUtils;
 
 import java.util.Date;
 
+/**
+ *  递归算法
+ */
 public class Recursion {
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
@@ -19,9 +23,6 @@ public class Recursion {
         Object a = null;
         String b = null;
         StringUtils.isNotBlank(b);
-        Employee harry = new Employee();
-        Date d = harry.getHireDay();
-        d.setTime(d.getTime() - (long)213124324L);
 
     }
 

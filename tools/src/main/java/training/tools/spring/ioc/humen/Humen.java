@@ -14,11 +14,13 @@ package training.tools.spring.ioc.humen;/**
  * Modified By:
  */
 
+import training.tools.constant.HumenConstant;
+
 /**
  * @author zhanghui
  * @description
  * @date 2019/9/25
  */
-public interface Humen {
+public interface Humen extends HumenConstant {
     public void goHome();
 }

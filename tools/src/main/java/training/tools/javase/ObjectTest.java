@@ -1,30 +1,45 @@
-package training.tools.algorithm;
+package training.tools.javase;
 
-import java.util.Arrays;
+import training.tools.utils.SysTools;
+
+import java.util.ArrayList;
 
 public class ObjectTest {
     public static void main(String[] args) {
         Employee x = new Employee(2L);
+
         Employee y = new Employee(3L);
+        Employee t = x.clone();
+        x.setSalary(5D);
+        SysTools._out(x,"当前员工");
+        SysTools._out(t, "被拷贝的对象");
+
         swap(x, y);
 
-        Manager z = new Manager(2,4L);
+        Manager z = new Manager(2, 4L);
         Double s = 23D;
         z.setSalary(23D);
         z.getCurrent();
-        System.out.println("当前类是子类吗?"+ (z.getCurrent() instanceof  Manager));
-        Object a = null;
-        Object b = "章辉";
-        System.out.println(b.hashCode());
+        System.out.println("当前类是子类吗?" + (z.getCurrent() instanceof Manager));
+
+        Object n = null;
+        Object m = "章辉";
         System.out.println(z);
 
+        ArrayList<Integer> arrayList = new ArrayList();
+
+    }
+
+    public static void say(Object... objs) {
+        for (Object obj : objs) {
+            System.out.println(obj);
+        }
     }
 
     public static void swap(Employee a, Employee b) {
         Employee temp = a;
         a = b;
         b = temp;
-        Employee c;
     }
 
     /**
@@ -42,4 +57,6 @@ public class ObjectTest {
     public static void mult(int a, int times) {
         a = a * times;
     }
+
+
 }
