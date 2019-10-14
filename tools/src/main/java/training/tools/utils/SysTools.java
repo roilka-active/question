@@ -9,4 +9,9 @@ public class SysTools {
         }
         System.out.println(stringBuilder+":"+obj);
     }
+
+    public static void main(String... args){
+        String s =System.getProperty("user.dir");
+        _out(s);
+    }
 }
