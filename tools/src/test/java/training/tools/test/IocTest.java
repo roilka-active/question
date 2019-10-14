@@ -44,7 +44,7 @@ public class IocTest {
     }*/
 
     /*@Test
-    public void test(){
+    public void Test(){
         Humen zhangSan = (Humen) iocContainer.getBean("zhangSan");
         zhangSan.goHome();
         Humen liSi = (Humen) iocContainer.getBean("liSi");
