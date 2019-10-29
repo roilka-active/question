@@ -10,7 +10,7 @@ public class SysTools {
         }
         _out(stringBuilder+":"+obj);
     }
-    public static <T> void _out(T obj,String before,String after){
+    public static <T> void _out(T obj,Object before,Object after){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(before);
         stringBuilder.append(obj);

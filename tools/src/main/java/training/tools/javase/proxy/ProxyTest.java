@@ -3,6 +3,7 @@ package training.tools.javase.proxy;
 import training.tools.javase.Employee;
 import training.tools.utils.SysTools;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 

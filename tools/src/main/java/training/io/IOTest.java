@@ -26,12 +26,15 @@ import java.io.*;
 public class IOTest {
 
     final String SrcPath = this.getClass().getResource("/").getPath();
+    static final String prePath = "D:\\GIT\\owner\\Manager\\training\\tools\\src\\main\\resources";
     public static void main(String[] args) throws IOException {
 
         String path =System.getProperty("java.class.path");
-        FileInputStream fin = new FileInputStream( "D:\\WorkSpace\\GIT\\owner\\Roilka-Manager\\training\\tools\\src\\main\\resources\\sensi_words.txt");
+        FileInputStream fin = new FileInputStream( prePath + "\\sensi_words.txt");
         DataInputStream din = new DataInputStream(fin);
         double s = din.readDouble();
         SysTools._out(s,"这是文件里读出来的：");
+        FileReader fileReader = new FileReader(new File(prePath + "\\sensi_words.txt"));
+        SysTools._out(fin.getFD(),"文件描述");
     }
 }

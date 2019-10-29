@@ -12,7 +12,7 @@ public class Employee implements Cloneable{
     Employee() {
         this.date = new Date();
     }
-    Employee(double salary) {
+    public Employee(double salary) {
         System.out.println("Employee is init!");
         this.salary = salary;
         this.date = new Date();
