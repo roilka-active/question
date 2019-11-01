@@ -35,7 +35,6 @@ public class PriorityQueueTest {
         List<Employee> employeeList = Arrays.asList(employees);
         Iterator<Employee> iterator1 = employeeList.iterator();
         iterator1.next();
-        iterator1.remove();
         while (iterator1.hasNext()){
             SysTools._out(iterator1.next());
         }

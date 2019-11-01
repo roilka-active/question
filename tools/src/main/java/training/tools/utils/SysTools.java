@@ -12,9 +12,15 @@ public class SysTools {
     }
     public static <T> void _out(T obj,Object before,Object after){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(before);
+        if (before !=null){
+            stringBuilder.append(before);
+        }
+
         stringBuilder.append(obj);
-        stringBuilder.append(after);
+        if (after != null){
+            stringBuilder.append(after);
+        }
+
        _out(stringBuilder);
     }
     public static <T> void _out(T obj){
