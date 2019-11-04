@@ -15,6 +15,44 @@ public class LinkedListTest {
 
         Map<String, Employee> map = Collections.synchronizedMap(new HashMap<>());
         //itratorOut(list);
+        //insertCollection();
+
+    }
+    public int[] twoSum(int[] nums, int target) {
+        int[] result = new int[nums.length];
+        for(int i=0;i<nums.length;i++){
+            result[i] = nums[i] - target;
+        }
+        return result;
+    }
+    public static  void  insertCollection(){
+        LinkedList<Integer> linkedList = new LinkedList();
+        for (int i = 0; i <20 ; i++) {
+            linkedList.add(i);
+        }
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            arrayList.add(-1*i);
+        }
+        ListIterator<Integer> listIterator = linkedList.listIterator();
+        Iterator<Integer> iterator = arrayList.iterator();
+        while (listIterator.hasNext()){
+            listIterator.next();
+        }
+        for (int i = linkedList.size() - 1; i >= 0 ; i--) {
+
+        }
+        List<Integer> result = new LinkedList<>();
+        while (listIterator.hasPrevious() && iterator.hasNext()){
+            listIterator.add(iterator.next());
+            listIterator.previous();
+            listIterator.previous();
+            listIterator.remove();
+        }
+        for (;listIterator.hasPrevious();listIterator.hasPrevious(),listIterator.hasPrevious()){
+
+        }
+        SysTools._out(linkedList);
     }
     public static <T> void itratorOut(LinkedList<T> list){
         Iterator<T> iterator = list.iterator();
