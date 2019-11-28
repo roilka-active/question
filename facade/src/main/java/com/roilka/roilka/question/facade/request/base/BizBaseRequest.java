@@ -18,4 +18,5 @@ public class BizBaseRequest<T> implements Serializable {
     private String version;
 
     private  T postData;
+
 }
