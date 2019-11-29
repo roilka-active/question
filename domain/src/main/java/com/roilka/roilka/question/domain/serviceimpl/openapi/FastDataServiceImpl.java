@@ -16,6 +16,7 @@ public class FastDataServiceImpl implements FastDataService {
 
     @Override
     public Object getAreaInfo() {
+
         return null;
     }
 }

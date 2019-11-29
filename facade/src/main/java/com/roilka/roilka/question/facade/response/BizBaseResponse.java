@@ -20,19 +20,19 @@ public class BizBaseResponse<T> implements Serializable {
 
     private T result;
 
-    BizBaseResponse() {
+    public BizBaseResponse() {
         this(BizResponseCodeEnum.SUCCESS.getCode(), BizResponseCodeEnum.SUCCESS.getName(), null);
     }
 
-    BizBaseResponse(Integer code, String message) {
+    public BizBaseResponse(Integer code, String message) {
         this(code, message, null);
     }
 
-    BizBaseResponse(T data) {
+    public BizBaseResponse(T data) {
         this(BizResponseCodeEnum.SUCCESS.getCode(), BizResponseCodeEnum.SUCCESS.getName(), data);
     }
 
-    BizBaseResponse(Integer code, String message, T data) {
+    public BizBaseResponse(Integer code, String message, T data) {
         this.code = BizResponseCodeEnum.SUCCESS.getCode();
         this.message = BizResponseCodeEnum.SUCCESS.getName();
         this.result = data;
