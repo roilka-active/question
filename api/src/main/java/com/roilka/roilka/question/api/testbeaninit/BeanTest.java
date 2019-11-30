@@ -1,4 +1,4 @@
-package com.roilka.roilka.question.api.test;
+package com.roilka.roilka.question.api.testbeaninit;
 
 import com.roilka.roilka.question.api.config.AppConfig;
 import com.roilka.roilka.question.dal.entity.user.User;

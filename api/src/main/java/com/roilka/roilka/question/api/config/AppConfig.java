@@ -16,7 +16,7 @@ public class AppConfig {
     public User initUser(){
         User user = new User();
         user.setId(11L);
-        user.setNote("this is test!");
+        user.setNote("this is testbeaninit!");
         user.setUserName("roilka");
         return user;
     }
