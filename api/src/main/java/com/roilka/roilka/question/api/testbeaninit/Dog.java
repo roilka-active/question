@@ -14,12 +14,14 @@ package com.roilka.roilka.question.api.testbeaninit;/**
  * Modified By:
  */
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author zhanghui
  * @description 狗
  * @date 2019/11/30
  */
-
+@Component
 public class Dog implements Animal {
     @Override
     public void use() {

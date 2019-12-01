@@ -1,9 +1,12 @@
 package com.roilka.roilka.question.api.redis;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import redis.clients.jedis.Jedis;
@@ -18,17 +21,20 @@ import java.util.Map;
  * @Author zhanghui1
  * @Date 2019/11/20 20:28
  **/
+@Api(tags = "Redis 控制器")
 @Controller
 @RequestMapping("/redis")
 public class RedisController {
 
     @Autowired
+
     private RedisTemplate redisTemplate = null;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate = null;
 
-    @RequestMapping("/testStringAndHash")
+    @ApiOperation(value = "redis 测试String和Hash")
+    @GetMapping("/testStringAndHash")
     @ResponseBody
     public Map<String, Object> testStringAndHash() {
         redisTemplate.opsForValue().set("key1", "Value1");
@@ -54,7 +60,8 @@ public class RedisController {
         return result;
     }
 
-    @RequestMapping("/testList")
+    @ApiOperation(value = "redis 测试List")
+    @GetMapping("/testList")
     @ResponseBody
     public Map<String, Object> testList() {
         // 插入两个列表，注意他们在链表中的顺序
@@ -78,7 +85,8 @@ public class RedisController {
     }
 
 
-    @RequestMapping("/testPipeLine")
+    @ApiOperation(value = "redis 测试PipeLine")
+    @GetMapping("/testPipeLine")
     @ResponseBody
     public Map<String, Object> testPipeLine() {
         Long start = System.currentTimeMillis();

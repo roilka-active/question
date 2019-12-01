@@ -21,9 +21,6 @@ import java.lang.reflect.Field;
 public class OuterController {
 
     @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
     private FastDataService fastDataService;
 
     public BizBaseResponse<JSONPObject> getDream(){
@@ -40,7 +37,5 @@ public class OuterController {
         }
     }
 
-    public static void main(String[] args) {
-        getAnnotation();
-    }
+
 }

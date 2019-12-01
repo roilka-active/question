@@ -1,0 +1,38 @@
+server:
+  port: 2003
+  max-http-header-size: 10240
+
+question:
+  swagger-open: true                #是否开启swagger (true/false)
+
+
+# Mysql数据库
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+    username: root
+    password: 111111
+    filters: wall,mergeStat
+    data-source-name: gunsdb
+
+#配置连接池属性
+  redis:
+    jedis:
+      pool:
+        max-active: 10
+        max-idle: 10
+        max-wait: 2000
+        min-idle: 5
+  #配置redis 服务器属性
+    port: 6379
+    host: 39.98.153.159
+    password: pwdredis123456
+  #Redis 连接超时 单位毫秒
+    timeout: 1000
+
+
+logging:
+  config: classpath:logback-spring.xml
+  file:
+      path: D:/nmyslog/nmys
