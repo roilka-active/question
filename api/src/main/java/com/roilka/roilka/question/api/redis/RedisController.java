@@ -1,7 +1,10 @@
 package com.roilka.roilka.question.api.redis;
 
+import com.roilka.roilka.question.api.testbeaninit.BussinessPerson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.data.redis.core.*;
@@ -21,6 +24,7 @@ import java.util.Map;
  * @Author zhanghui1
  * @Date 2019/11/20 20:28
  **/
+@Slf4j
 @Api(tags = "Redis 控制器")
 @Controller
 @RequestMapping("/redis")
@@ -29,6 +33,9 @@ public class RedisController {
     @Autowired
 
     private RedisTemplate redisTemplate = null;
+
+    @Autowired
+    private BussinessPerson bussinessPerson;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate = null;
@@ -64,6 +71,8 @@ public class RedisController {
     @GetMapping("/testList")
     @ResponseBody
     public Map<String, Object> testList() {
+        bussinessPerson.service();
+        log.info("MDC- url ={}",MDC.get("url"));
         // 插入两个列表，注意他们在链表中的顺序
         stringRedisTemplate.opsForList().leftPushAll("List:list1", "V2","V4","V6","V8","V10");
         stringRedisTemplate.opsForList().leftPushAll("List:list2", "V1","V2","V3","V4","V5");

@@ -14,6 +14,8 @@ package com.roilka.roilka.question.api.testbeaninit;/**
  * Modified By:
  */
 
+import java.util.List;
+
 /**
  * @author zhanghui
  * @description 人类接口
@@ -24,4 +26,6 @@ public interface Person {
     void service();
 
     void setAnimal(Animal animal);
+
+    void setAnimalList(List<Animal> animalList);
 }

@@ -19,7 +19,7 @@ public class BeanTest {
     public static void main(String[] args) {
 
         ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-        User user = ctx.getBean(User.class);
-        logger.info("user.id={}", user.getId());
+        Person person = ctx.getBean(BussinessPerson.class);
+        person.service();
     }
 }

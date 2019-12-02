@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@Order(Ordered.HIGHEST_PRECEDENCE-100)
 public class AspectLog extends AbstractControllerLogAspect {
 
 
