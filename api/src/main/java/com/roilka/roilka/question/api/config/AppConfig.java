@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @ComponentScan(basePackageClasses = BussinessPerson.class,lazyInit = true)
 @Configuration
 public class AppConfig {
-    @Bean(name = "user")
+    @Bean(name = "users")
     public User initUser(){
         User user = new User();
         //user.setId(11L);
