@@ -1,18 +1,4 @@
-package com.roilka.roilka.question.dal;/**
- * Package: com.roilka.roilka.question.api
- * <p>
- * Description： TODO
- * <p>
- * Author: zhanghui
- * <p>
- * Date: Created in 2019/12/6 0:10
- * <p>
- * Company: tuhu
- * <p>
- * Copyright: Copyright (c) 2019
- * <p>
- * Modified By:
- */
+package com.roilka.roilka.question.dal;
 
 
 import com.baomidou.mybatisplus.annotation.DbType;
@@ -99,7 +85,7 @@ public class Generator {
             //        mpg.setCfg(cfg);
             // 包配置
             PackageConfig pc = new PackageConfig();
-            pc.setParent("com.tuhu.tech");
+            pc.setParent("com.roilka.roilka");
             pc.setEntity("dao");
             pc.setMapper("dao");
             pc.setXml("mapper");

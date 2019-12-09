@@ -1,18 +1,4 @@
-package com.roilka.roilka.question.api.testbeaninit;/**
- * Package: com.roilka.roilka.question.api.testbeaninit
- * <p>
- * Description： TODO
- * <p>
- * Author: zhanghui
- * <p>
- * Date: Created in 2019/11/30 19:11
- * <p>
- * Company: tuhu
- * <p>
- * Copyright: Copyright (c) 2019
- * <p>
- * Modified By:
- */
+package com.roilka.roilka.question.api.testbeaninit;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -4,7 +4,10 @@ import com.alibaba.fastjson.JSONPObject;
 import com.roilka.roilka.question.domain.service.openapi.FastDataService;
 import com.roilka.roilka.question.facade.response.BizBaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.Field;

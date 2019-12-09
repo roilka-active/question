@@ -1,18 +1,4 @@
-package com.roilka.roilka.question.api.config;/**
- * Package: com.roilka.roilka.question.api.config
- * <p>
- * Description： TODO
- * <p>
- * Author: zhanghui
- * <p>
- * Date: Created in 2019/12/1 0:14
- * <p>
- * Company: tuhu
- * <p>
- * Copyright: Copyright (c) 2019
- * <p>
- * Modified By:
- */
+package com.roilka.roilka.question.api.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

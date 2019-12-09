@@ -1,18 +1,4 @@
-package com.roilka.roilka.question.domain.service.base;/**
- * Package: com.roilka.roilka.question.domain.service.base
- * <p>
- * Description： TODO
- * <p>
- * Author: zhanghui
- * <p>
- * Date: Created in 2019/12/9 0:40
- * <p>
- * Company: tuhu
- * <p>
- * Copyright: Copyright (c) 2019
- * <p>
- * Modified By:
- */
+package com.roilka.roilka.question.domain.service.base;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

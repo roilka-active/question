@@ -2,10 +2,15 @@ package com.roilka.roilka.question.api.config;
 
 import com.roilka.roilka.question.api.testbeaninit.BussinessPerson;
 import com.roilka.roilka.question.dal.entity.user.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
+
+import javax.annotation.PostConstruct;
 
 /**
  * @ClassName AppConfig
@@ -13,15 +18,23 @@ import org.springframework.stereotype.Component;
  * @Author zhanghui1
  * @Date 2019/11/29 17:29
  **/
-@ComponentScan(basePackageClasses = BussinessPerson.class)
-@Configuration
-public class AppConfig {
-    @Bean(name = "user1")
-    public User initUser(){
-        User user = new User();
-        //user.setId(11L);
-        user.setNote("this is testbeaninit!");
-        user.setUserName("roilka");
-        return user;
+@SpringBootApplication(scanBasePackageClasses = RedisInitConfig.class)
+public class RedisInitConfig {
+
+    // 注入RedisTemplete
+    @Autowired
+    private RedisTemplate redisTemplate = null;
+
+    @PostConstruct
+    public void init(){
+       initRedisTemplete();
+    }
+
+    private void initRedisTemplete(){
+        RedisSerializer stringSerializer = redisTemplate.getStringSerializer();
+        redisTemplate.setKeySerializer(stringSerializer);
+        redisTemplate.setHashKeySerializer(stringSerializer);
+        redisTemplate.setValueSerializer(stringSerializer);
+        redisTemplate.setHashValueSerializer(stringSerializer);
     }
 }
