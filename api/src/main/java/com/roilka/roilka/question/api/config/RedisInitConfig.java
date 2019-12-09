@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  **/
 @ComponentScan(basePackageClasses = BussinessPerson.class)
 @Configuration
-public class AppConfig {
+public class RedisInitConfig {
     @Bean(name = "user1")
     public User initUser(){
         User user = new User();
