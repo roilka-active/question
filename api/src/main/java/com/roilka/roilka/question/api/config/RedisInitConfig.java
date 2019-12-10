@@ -26,11 +26,11 @@ public class RedisInitConfig {
     private RedisTemplate redisTemplate = null;
 
     @PostConstruct
-    public void init(){
-       initRedisTemplete();
+    public void init() {
+        initRedisTemplete();
     }
 
-    private void initRedisTemplete(){
+    private void initRedisTemplete() {
         RedisSerializer stringSerializer = redisTemplate.getStringSerializer();
         redisTemplate.setKeySerializer(stringSerializer);
         redisTemplate.setHashKeySerializer(stringSerializer);
