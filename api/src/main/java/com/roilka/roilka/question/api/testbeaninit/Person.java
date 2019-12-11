@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface Person {
 
-    void service();
+    void service(String s);
 
     void setAnimal(Animal animal);
 

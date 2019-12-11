@@ -27,10 +27,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.roilka</groupId>
-            <artifactId>roilka-question-common</artifactId>
-        </dependency>
+        
         <dependency>
             <groupId>com.roilka</groupId>
             <artifactId>roilka-question-facade</artifactId>

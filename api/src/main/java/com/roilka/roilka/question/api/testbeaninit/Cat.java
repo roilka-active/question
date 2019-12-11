@@ -15,8 +15,10 @@ import org.springframework.stereotype.Component;
 @Component
 @Primary
 public class Cat implements Animal {
+    private static String Temp = "I am A!";
     @Override
-    public void use() {
+    public void use(String a) {
+        Temp = a;
         log.info("猫{}抓老鼠的", Cat.class.getSimpleName());
     }
 }

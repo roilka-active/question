@@ -18,13 +18,15 @@ public class BeanTest {
 
     public static void main(String[] args) {
 
-       /* ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+        System.out.println(ctx.getBean(BussinessPerson.class));
+        System.out.println(ctx.getBean(BussinessPerson.class));
         Person person = ctx.getBean(BussinessPerson.class);
-        person.service();*/
-       String a = "tt";
+        person.service("s");
+       /*String a = "tt";
        String b = "aa";
        System.out.println(String.format("%S(%s)",a,b));
        Integer c = 8;
-       System.out.println(String.format("%d 小时",c));
+       System.out.println(String.format("%d 小时",c));*/
     }
 }

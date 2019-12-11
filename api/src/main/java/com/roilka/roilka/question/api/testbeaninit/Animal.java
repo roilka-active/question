@@ -6,5 +6,5 @@ package com.roilka.roilka.question.api.testbeaninit;
  * @date 2019/11/30
  */
 public interface Animal {
-    void use();
+    void use(String a);
 }

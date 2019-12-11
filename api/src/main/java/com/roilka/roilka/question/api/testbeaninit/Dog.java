@@ -9,10 +9,12 @@ import org.springframework.stereotype.Component;
  * @date 2019/11/30
  */
 @Slf4j
-@Component
+@Component()
 public class Dog implements Animal {
+    private static String Temp = "I am A!";
     @Override
-    public void use() {
+    public void use(String a) {
+        Temp = a;
         log.info("狗{} 是看门用的", Dog.class.getSimpleName());
     }
 }

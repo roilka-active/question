@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
+@Scope(value = "prototype")
 public class BussinessPerson implements Person, BeanNameAware, BeanFactoryAware,
         ApplicationContextAware, InitializingBean, DisposableBean {
 
@@ -33,10 +35,10 @@ public class BussinessPerson implements Person, BeanNameAware, BeanFactoryAware,
 
 
     @Override
-    public void service() {
-        this.animal.use();
+    public void service(String s) {
+        this.animal.use(s);
         for (Animal a : animalList) {
-            a.use();
+            a.use(s);
         }
     }
 
@@ -53,7 +55,6 @@ public class BussinessPerson implements Person, BeanNameAware, BeanFactoryAware,
         System.out.println("批量依赖注入");
         this.animalList = animalList;
     }
-
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         log.info("setBeanFactory,beanFactory={},animal={}", beanFactory,this.animal == null ? null : this.animal.getClass().getSimpleName());

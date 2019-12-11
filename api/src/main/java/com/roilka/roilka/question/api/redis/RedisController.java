@@ -1,5 +1,6 @@
 package com.roilka.roilka.question.api.redis;
 
+import com.roilka.roilka.question.api.testbeaninit.Animal;
 import com.roilka.roilka.question.api.testbeaninit.BussinessPerson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +13,7 @@ import org.springframework.data.redis.connection.RedisZSetCommands;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import redis.clients.jedis.Jedis;
@@ -38,8 +40,17 @@ public class RedisController {
     private BussinessPerson bussinessPerson;
 
     @Autowired
+    private Animal animal;
+    @Autowired
     private StringRedisTemplate stringRedisTemplate = null;
 
+    @ApiOperation(value = "redis 测试String和Hash")
+    @GetMapping("/testStringAndHash/{a}")
+    @ResponseBody
+    public Object testBean(@PathVariable("a") String a){
+        bussinessPerson.service(a);
+        return null;
+    }
     @ApiOperation(value = "redis 测试String和Hash")
     @GetMapping("/testStringAndHash")
     @ResponseBody
@@ -71,7 +82,6 @@ public class RedisController {
     @GetMapping("/testList")
     @ResponseBody
     public Map<String, Object> testList() {
-        bussinessPerson.service();
         log.info("MDC- url ={}", MDC.get("url"));
         // 插入两个列表，注意他们在链表中的顺序
         stringRedisTemplate.opsForList().leftPushAll("List:list1", "V2", "V4", "V6", "V8", "V10");
