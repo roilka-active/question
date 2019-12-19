@@ -28,4 +28,8 @@
         <result column="index_url" property="indexUrl" />
     </resultMap>
 
+    <select id="getList" resultMap="BaseResultMap" >
+        select  * from  users_info
+    </select>
+
 </mapper>

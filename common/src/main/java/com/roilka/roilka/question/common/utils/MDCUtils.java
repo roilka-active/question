@@ -21,13 +21,17 @@ import java.util.Map;
 @Slf4j
 public class MDCUtils implements AutoCloseable {
 
-    /*
-      链路跟踪编号
+    /**
+     * 链路跟踪编号
      */
     public static final String                                         REQ_KEY           = "reqKey";
-    // IP地址
+    /**
+     * IP地址
+     */
     public static final String                                         IP                = "ip";
-    // 当前服务名称
+    /**
+     * 当前服务名称
+     */
     public static final String                                         APPLICATION_NAME  = "applicationName";
     /**
      * RequestID

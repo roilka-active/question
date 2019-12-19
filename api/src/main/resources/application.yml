@@ -38,3 +38,7 @@ logging:
   config: classpath:logback-spring.xml
   file:
       path: D:/nmyslog/nmys
+
+
+mybatis:
+  mapper-locations: classpath:sqlmap/**/*Mapper.xml
