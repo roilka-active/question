@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 /**
  * @ClassName FastDataServiceImpl
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/11/27 17:37
  **/
 

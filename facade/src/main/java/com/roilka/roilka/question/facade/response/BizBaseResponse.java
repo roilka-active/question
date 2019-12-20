@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * @ClassName BizBaseResponse
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/11/26 19:53
  **/
 @Data

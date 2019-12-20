@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * @ClassName CommonProperties
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/12/6 20:41
  **/
 @ConfigurationProperties(prefix = "roilka-common")

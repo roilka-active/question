@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 /**
  * @ClassName User
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/11/29 17:27
  **/
 @Data

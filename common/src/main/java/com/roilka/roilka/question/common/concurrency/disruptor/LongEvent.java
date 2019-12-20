@@ -3,7 +3,7 @@ package com.roilka.roilka.question.common.concurrency.disruptor;
 /**
  * @ClassName LongEvent
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/12/11 20:11
  **/
 public class LongEvent {

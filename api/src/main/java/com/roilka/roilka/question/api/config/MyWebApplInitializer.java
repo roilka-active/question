@@ -7,7 +7,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 /**
  * @ClassName MyWebApplInitializer
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/11/29 13:46
  **/
 public class MyWebApplInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {

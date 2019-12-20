@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 /**
  * @ClassName FastDataService
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/11/27 10:44
  **/
 public interface FastDataService {

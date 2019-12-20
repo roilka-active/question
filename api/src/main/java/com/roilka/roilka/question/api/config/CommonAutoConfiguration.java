@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @ClassName CommonAutoConfiguration
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/12/6 20:27
  **/
 @Configuration

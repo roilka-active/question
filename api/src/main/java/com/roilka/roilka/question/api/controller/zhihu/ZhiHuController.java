@@ -27,7 +27,7 @@ import java.util.Set;
 /**
  * @ClassName OuterController
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/11/26 19:42
  **/
 @Slf4j
@@ -58,6 +58,8 @@ public class ZhiHuController {
         }
         // 往有序集合插入元素
         stringRedisTemplate.opsForZSet().add("zhihu:follower:rankings", typedTupleSet);
+        long a = stringRedisTemplate.opsForZSet().reverseRank("zhihu:follower:rankings", "366107");
+        log.info("用户366107的，排名是={} ", a);
         return new BizBaseResponse<JSONPObject>();
     }
 

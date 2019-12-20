@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 /**
  * @ClassName StringUtils
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/12/9 11:10
  **/
 public class StringUtils {

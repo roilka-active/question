@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * @ClassName MDCUtils
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/12/9 11:50
  **/
 @Slf4j
@@ -74,8 +74,8 @@ public class MDCUtils implements AutoCloseable {
     }
 
     public static void main(String[] args) {
-        addRemoteEndpoint("MDSHOPAPI5%2CMDSVCTSORDER2");
-        addRemoteName("shopapi.tuhu.cn%2CTuhu.Service.TuhuShop.ShopOrder");
+        addRemoteEndpoint("");
+        addRemoteName("");
     }
 
     @Value("${spring.application.name}")
@@ -86,9 +86,8 @@ public class MDCUtils implements AutoCloseable {
     /*    */
 
     /**
-     * 初始化mdc, 通常用于请求开始前
-     *
-     * @param print
+     *  初始化mdc, 通常用于请求开始前
+     * @param objects
      */
     /*
      * public static void initMDC(Printable obj) { if (obj == null) { return; }

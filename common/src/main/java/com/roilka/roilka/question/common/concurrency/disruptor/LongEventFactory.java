@@ -5,7 +5,7 @@ import com.lmax.disruptor.EventFactory;
 /**
  * @ClassName LongEventFactory
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/12/11 20:19
  **/
 public class LongEventFactory implements EventFactory<LongEvent> {

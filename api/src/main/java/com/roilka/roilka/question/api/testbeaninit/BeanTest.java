@@ -10,7 +10,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 /**
  * @ClassName BeanTest
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/11/29 19:07
  **/
 public class BeanTest {

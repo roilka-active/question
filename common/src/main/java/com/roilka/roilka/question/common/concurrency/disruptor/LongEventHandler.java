@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @ClassName LongEventHandler
  * @Description 消费者
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/12/11 20:21
  **/
 @Slf4j

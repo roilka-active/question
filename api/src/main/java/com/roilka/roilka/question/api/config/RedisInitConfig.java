@@ -15,7 +15,7 @@ import javax.annotation.PostConstruct;
 /**
  * @ClassName AppConfig
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/11/29 17:29
  **/
 @SpringBootApplication(scanBasePackageClasses = RedisInitConfig.class)

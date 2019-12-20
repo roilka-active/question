@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 /**
  * @ClassName HttpConfig
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/11/27 17:34
  **/
 public class HttpConfig {

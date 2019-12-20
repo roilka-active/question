@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 /**
  * @ClassName AppConfig
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/11/29 17:29
  **/
 @ComponentScan(basePackageClasses = BussinessPerson.class,lazyInit = true)

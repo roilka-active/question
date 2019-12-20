@@ -1,18 +1,5 @@
-package com.roilka.roilka.question.common.concurrency;/**
- * Package: com.roilka.roilka.question.common.concurrency
- * <p>
- * Description： TODO
- * <p>
- * Author: zhanghui
- * <p>
- * Date: Created in 2019/12/10 1:14
- * <p>
- * Company: tuhu
- * <p>
- * Copyright: Copyright (c) 2019
- * <p>
- * Modified By:
- */
+package com.roilka.roilka.question.common.concurrency;
+
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;

@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 /**
  * @ClassName WebBaseController
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/11/26 16:15
  **/
 @Controller

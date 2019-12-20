@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 /**
  * @ClassName LongEventMain
  * @Description TODO
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/12/11 20:24
  **/
 public class LongEventMain {

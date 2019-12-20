@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 /**
  * @ClassName LongEventProducer
  * @Description 消费者实现为WorkHandler接口，是Disruptor框架中的类
- * @Author zhanghui1
+ * @Author changyou
  * @Date 2019/12/11 20:23
  **/
 public class LongEventProducer {
