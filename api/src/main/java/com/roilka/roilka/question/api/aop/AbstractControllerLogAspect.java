@@ -62,7 +62,8 @@ public abstract class AbstractControllerLogAspect {
         log.info("RC服务结束调用:{},耗时={}ms,result={}", logController.value(), timeTaken, result);
     }
 
-    public void doAfterThrowing(ProceedingJoinPoint joinPoint, ApiOperation logController, Throwable exception) {
+    public void doAfterThrowing(ProceedingJoinPoint joinPoint, ApiOperation logController, Throwable exception) throws Throwable{
 
+        throw exception;
     }
 }
