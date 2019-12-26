@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * @author changyou
  * @since 2019-12-06
  */
-@Mapper
+@Repository
 public interface UsersMapper extends BaseMapper<Users> {
 
 }

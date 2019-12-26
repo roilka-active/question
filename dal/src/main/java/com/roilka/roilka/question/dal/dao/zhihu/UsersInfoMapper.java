@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2019-12-06
  */
 @Mapper
-public interface UsersInfoMapper  {
+public interface UsersInfoMapper extends BaseMapper<UsersInfo>{
 
     List<UsersInfo> getList();
 }

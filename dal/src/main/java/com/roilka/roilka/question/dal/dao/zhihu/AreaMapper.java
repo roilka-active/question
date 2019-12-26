@@ -14,4 +14,5 @@ import com.roilka.roilka.question.dal.entity.zhihu.Area;
  */
 public interface AreaMapper extends BaseMapper<Area> {
 
+    int insertSelective(Area area);
 }

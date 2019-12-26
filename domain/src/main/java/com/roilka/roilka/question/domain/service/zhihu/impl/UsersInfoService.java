@@ -1,8 +1,8 @@
 package com.roilka.roilka.question.domain.service.zhihu.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.roilka.roilka.question.dal.dao.zhihu.UsersInfoMapper;
 import com.roilka.roilka.question.dal.entity.zhihu.UsersInfo;
-import com.roilka.roilka.question.domain.service.base.AbstractServiceImpl;
 import com.roilka.roilka.question.domain.service.zhihu.IUsersInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.List;
  * @since 2019-12-06
  */
 @Service(value = "usersInfoService")
-public class UsersInfoService implements IUsersInfoService {
+public class UsersInfoService extends ServiceImpl<UsersInfoMapper,UsersInfo> implements IUsersInfoService {
 
     @Autowired
     private UsersInfoMapper usersInfoMapper;
@@ -26,4 +26,6 @@ public class UsersInfoService implements IUsersInfoService {
     public List<UsersInfo> getList() {
         return usersInfoMapper.getList();
     }
+
+
 }

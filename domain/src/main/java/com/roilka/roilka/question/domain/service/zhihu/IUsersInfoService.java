@@ -13,6 +13,6 @@ import java.util.List;
  * @author changyou
  * @since 2019-12-06
  */
-public interface IUsersInfoService {
+public interface IUsersInfoService extends IService<UsersInfo>{
     List<UsersInfo> getList();
 }

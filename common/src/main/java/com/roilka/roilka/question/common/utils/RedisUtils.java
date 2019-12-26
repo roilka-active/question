@@ -8,10 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisStringCommands;
 import org.springframework.data.redis.connection.ReturnType;
-import org.springframework.data.redis.core.BoundHashOperations;
-import org.springframework.data.redis.core.RedisCallback;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.core.types.Expiration;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
@@ -33,31 +30,36 @@ public class RedisUtils {
     /**
      * redis操作类
      */
-    private RedisTemplate<String, String> redis;
+    private StringRedisTemplate redis;
 
-    private String                        redisPrefix;
+    private String                     redisPrefix;
 
     /**
      * get or set 方法分布式锁的过期时间ms
      */
-    private static final long             GET_OR_SET_EXPIRED_TIME    = 10000;
+    private static final long          GET_OR_SET_EXPIRED_TIME    = 10000;
 
     /**
      * get or set 方法休眠时间ms
      */
-    private static final long             GET_OR_SET_SLEEP_TIME      = 50;
+    private static final long          GET_OR_SET_SLEEP_TIME      = 50;
 
     /**
      * 默认获取锁等待时间5秒
      */
-    private static final int              DEFAULT_WAIT_TIME          = 5;
+    private static final int           DEFAULT_WAIT_TIME          = 5;
 
     /**
      * 获取锁的随机休眠时间
      */
-    private static final int              GET_LOCK_RANDOM_SLEEP_TIME = 100;
+    private static final int           GET_LOCK_RANDOM_SLEEP_TIME = 100;
 
-    public RedisUtils(RedisTemplate<String, String> redis, String redisPrefix) {
+    /**
+     * 工具类实体
+     */
+    private static volatile RedisUtils instance;
+
+    public RedisUtils(StringRedisTemplate redis, String redisPrefix) {
         this.redis = redis;
         this.redisPrefix = redisPrefix;
     }
@@ -65,6 +67,20 @@ public class RedisUtils {
     public RedisUtils() {
     }
 
+    public RedisUtils getInstance(StringRedisTemplate redis, String redisPrefix) {
+        if (instance == null) {
+            synchronized (this) {
+                if (instance == null) {
+                    instance = new RedisUtils(redis, redisPrefix);
+                }
+            }
+        }
+        return instance;
+    }
+
+    public static RedisUtils initInstance() {
+        return instance;
+    }
     /**
      * 获取存储的信息
      *
@@ -681,7 +697,39 @@ public class RedisUtils {
 
         return result;
     }
+    /**
+     * <p>
+     * 获取hash的key下的数量大小
+     * </p>
+     *
+     * @param key key
+     * @return hashKey集合，不存在时返回<code>null</code>
+     */
+    public Long redisHashSize(String key) {
 
+        if (logger.isDebugEnabled()) {
+            logger.debug("开始从redis取得数据:key={},", key);
+        }
+
+        Long result;
+
+        try {
+            BoundHashOperations<String, String, String> operations = redis.boundHashOps(key);
+            result = operations.size();
+
+        } catch (Exception e) {
+            if (logger.isInfoEnabled()) {
+                logger.info("从redis取得数据异常:key={}", key, e);
+            }
+            return null;
+        }
+
+        if (logger.isDebugEnabled()) {
+            logger.debug("从redis取得数据并封成对象结束:key={},result={}", key, result);
+        }
+
+        return result;
+    }
     /**
      * 获取key下所有hash
      *

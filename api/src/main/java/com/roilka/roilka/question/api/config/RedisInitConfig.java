@@ -4,6 +4,7 @@ import com.roilka.roilka.question.api.testbeaninit.BussinessPerson;
 import com.roilka.roilka.question.dal.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -41,6 +42,7 @@ public class RedisInitConfig {
     }
 
     @Bean //必须new 一个RestTemplate并放入spring容器当中,否则启动时报错
+    @ConditionalOnMissingBean(name = "restTemplate")
     public RestTemplate restTemplate() {
         HttpComponentsClientHttpRequestFactory httpRequestFactory = new HttpComponentsClientHttpRequestFactory();
         httpRequestFactory.setConnectionRequestTimeout(30 * 1000);

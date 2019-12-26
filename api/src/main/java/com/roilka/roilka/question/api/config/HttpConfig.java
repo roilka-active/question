@@ -10,8 +10,7 @@ import org.springframework.web.client.RestTemplate;
  * @Date 2019/11/27 17:34
  **/
 public class HttpConfig {
-    @Autowired
-    private RestTemplate restTemplate;
+
 
 
 }
