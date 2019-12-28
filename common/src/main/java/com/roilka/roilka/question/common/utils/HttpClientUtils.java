@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 

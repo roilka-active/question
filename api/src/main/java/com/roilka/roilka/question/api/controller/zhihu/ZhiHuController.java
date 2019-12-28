@@ -10,6 +10,7 @@ import com.roilka.roilka.question.common.constant.RedisFix;
 import com.roilka.roilka.question.common.enums.BizResponseCodeEnum;
 import com.roilka.roilka.question.common.utils.CollectionUtil;
 import com.roilka.roilka.question.common.utils.HttpClientUtils;
+import com.roilka.roilka.question.common.utils.JsonConvertUtils;
 import com.roilka.roilka.question.common.utils.RedisUtils;
 import com.roilka.roilka.question.dal.entity.zhihu.Area;
 import com.roilka.roilka.question.dal.entity.zhihu.Follower;
@@ -43,6 +44,9 @@ import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 
@@ -79,10 +83,11 @@ public class ZhiHuController {
 
     @GetMapping(value = "/testMapper/{id}")
     @ApiOperation("测试Mapper")
-    public void testMapper(@PathVariable("id") Integer id){
+    public void testMapper(@PathVariable("id") Integer id) {
         Users result = usersService.getById(id);
         log.info("结果：{}", result);
     }
+
     @GetMapping(value = "/get-user-info")
     @ApiOperation("添加知乎粉丝排名到redis")
     public BizBaseResponse<JSONPObject> getUserInfo() {
@@ -98,7 +103,7 @@ public class ZhiHuController {
             ZSetOperations.TypedTuple<String> typedTuple = new DefaultTypedTuple<>(result.get(i).getUserId(), Double.valueOf(result.get(i).getFollowers()));
             typedTupleSet.add(typedTuple);
         }*/
-        if (result.size()>0){
+        if (result.size() > 0) {
             return null;
         }
         long start = System.currentTimeMillis();
@@ -133,11 +138,11 @@ public class ZhiHuController {
     public BizBaseResponse<Boolean> flushArea() throws URISyntaxException {
         String url = "https://api.jisuapi.com/area/province";
         //Object responseEntity = restTemplate.getForObject("https://api.jisuapi.com/area/province", Object.class);
-        JSONObject a = httpClientUtils.doGetBase(url + "?appkey=" + APPID, null,"utf-8");
+        JSONObject a = httpClientUtils.doGetBase(url + "?appkey=" + APPID, null, "utf-8");
         GetAreaDataResponse response = JSONObject.toJavaObject(a, GetAreaDataResponse.class);
         List<GetAreaDataResponse.ResultBean> resultBeans = response.getResult();
 
-        Map<String, String> map = resultBeans.stream().collect(Collectors.toMap(record -> String.valueOf(record.getId()), record -> record.toString()));
+        Map<String, String> map = resultBeans.stream().collect(Collectors.toMap(record -> String.valueOf(record.getId()), record -> JsonConvertUtils.objectToJson(record)));
         log.info("result is {}", a);
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add("Content-Type", "application/json");
@@ -167,7 +172,7 @@ public class ZhiHuController {
             }
             List<GetAreaDataResponse.ResultBean> resultBeanList = new ArrayList<>();
             //Object responseEntity = restTemplate.getForObject("https://api.jisuapi.com/area/province", Object.class);
-            JSONObject a = httpClientUtils.doGetBase(url + "?parentid=" + Integer.parseInt(str) + "&appkey=" + APPID, null,"utf-8");
+            JSONObject a = httpClientUtils.doGetBase(url + "?parentid=" + Integer.parseInt(str) + "&appkey=" + APPID, null, "utf-8");
 
             GetAreaDataResponse response = JSONObject.toJavaObject(a, GetAreaDataResponse.class);
             if (response.getStatus() == 203) {
@@ -178,7 +183,7 @@ public class ZhiHuController {
             }
             List<GetAreaDataResponse.ResultBean> resultBeans = response.getResult();
 
-            Map<String, String> map = resultBeans.stream().collect(Collectors.toMap(record -> String.valueOf(record.getId()), record -> record.toString()));
+            Map<String, String> map = resultBeans.stream().collect(Collectors.toMap(record -> String.valueOf(record.getId()), record -> JsonConvertUtils.objectToJson(record)));
             redisUtils.redisHashPutAll(RedisFix.AREA + str, map);
         }
         return new BizBaseResponse<>(true);
@@ -198,12 +203,12 @@ public class ZhiHuController {
             if (size == 0) {
                 continue;
             }
-            Set<String> townSet = redisUtils.redisHashKeys(RedisFix.AREA + str);
+            Set<String> citySet = redisUtils.redisHashKeys(RedisFix.AREA + str);
 
-            for (String town : townSet) {
+            for (String city : citySet) {
                 List<GetAreaDataResponse.ResultBean> resultBeanList = new ArrayList<>();
                 //Object responseEntity = restTemplate.getForObject("https://api.jisuapi.com/area/province", Object.class);
-                JSONObject a = httpClientUtils.doGetBase(url + "?parentid=" + Integer.parseInt(str) + "&appkey=" + APPID, null,"utf-8");
+                JSONObject a = httpClientUtils.doGetBase(url + "?parentid=" + Integer.parseInt(city) + "&appkey=" + APPID, null, "utf-8");
 
                 GetAreaDataResponse response = JSONObject.toJavaObject(a, GetAreaDataResponse.class);
                 if (response.getStatus() == 203) {
@@ -214,8 +219,8 @@ public class ZhiHuController {
                 }
                 List<GetAreaDataResponse.ResultBean> resultBeans = response.getResult();
 
-                Map<String, String> map = resultBeans.stream().collect(Collectors.toMap(record -> String.valueOf(record.getId()), record -> record.toString()));
-                redisUtils.redisHashPutAll(RedisFix.AREA + str + ":" + town, map);
+                Map<String, String> map = resultBeans.stream().collect(Collectors.toMap(record -> String.valueOf(record.getId()), record -> JsonConvertUtils.objectToJson(record)));
+                redisUtils.redisHashPutAll(RedisFix.AREA + str + ":" + city, map);
             }
 
         }
@@ -225,48 +230,62 @@ public class ZhiHuController {
     @ApiOperation("存储区域信息")
     @GetMapping("store-area")
     public BizBaseResponse<Boolean> storeArea() {
-        List<Area> list = new ArrayList<>();
+        Set<Area> list = new HashSet<>();
         // 获取省集合
         Set<String> provinceSet = redisUtils.redisHashKeys(RedisFix.AREA);
-
-        Map<String, Area> provinceMap = redisUtils.redisHashGetAllWithInstance(RedisFix.AREA, Area.class);
-        list.addAll(provinceMap.values());
-
+        int numThread = provinceSet.size();
         for (String province : provinceSet) {
-            Long count = redisUtils.redisHashSize(RedisFix.AREA + province);
-            if (count == 0) {
-                continue;
-            }
-            // 存入所有省份
-            buildArea(RedisFix.AREA, province, list);
-            Set<String> citySet = redisUtils.redisHashKeys(RedisFix.AREA + province);
-
-            for (String city : citySet) {
-
-                count = redisUtils.redisHashSize(RedisFix.AREA + province + ":" + city);
-                if (count == 0) {
-                    continue;
-                }
-                // 存入城市
-                buildArea(RedisFix.AREA + province, city, list);
-                Set<String> townSet = redisUtils.redisHashKeys(RedisFix.AREA + province + ":" + city);
-                for (String town : townSet) {
-                    // 存入乡镇
-                    buildArea(RedisFix.AREA + province + ":" + city, town, list);
-                }
-            }
+            read(list, province);
         }
+
+
+        log.info("开始入库，size={}", list.size());
         list.stream().forEach(record -> {
             areaService.addArea(record);
         });
         return new BizBaseResponse<>(true);
     }
 
-    private void buildArea(String key, String hashKey, List<Area> list) {
-        GetAreaDataResponse.ResultBean bean = redisUtils.redisHashGetWithInstance(key, hashKey, GetAreaDataResponse.ResultBean.class);
+    private void read(Set<Area> list, String province) {
+        log.info("build province,{}", province);
+        Long count = redisUtils.redisHashSize(RedisFix.AREA + province);
+        if (count == 0) {
+            return;
+        }
 
+        // 存入所有省份
+        buildArea(RedisFix.AREA, province, list);
+        Set<String> citySet = redisUtils.redisHashKeys(RedisFix.AREA + province);
+        int cityCount = citySet.size();
+        for (String city : citySet) {
+            log.info("build city,name ={},cityCount={}", city, cityCount);
+            cityCount--;
+            count = redisUtils.redisHashSize(RedisFix.AREA + province + ":" + city);
+            if (count == 0) {
+                continue;
+            }
+            // 存入城市
+            buildArea(RedisFix.AREA + province, city, list);
+            Set<String> townSet = redisUtils.redisHashKeys(RedisFix.AREA + province + ":" + city);
+            int townCount = townSet.size();
+            for (String town : townSet) {
+                // 存入乡镇
+                log.info("build town,id ={},cityCount = {},townCount={}", town, cityCount, townCount);
+                townCount--;
+                buildArea(RedisFix.AREA + province + ":" + city, town, list);
+            }
+        }
+    }
+
+    private void buildArea(String key, String hashKey, Set<Area> list) {
+        GetAreaDataResponse.ResultBean bean = redisUtils.redisHashGetWithInstance(key, hashKey, GetAreaDataResponse.ResultBean.class);
         Area area = new Area();
-        BeanUtils.copyProperties(bean, area);
+        area.setAreaCode(bean.getAreacode());
+        area.setDepth(bean.getDepth());
+        area.setId(bean.getId());
+        area.setName(bean.getName());
+        area.setParentId(bean.getParentid());
+        area.setZipCode(bean.getZipcode());
         list.add(area);
     }
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.roilka.roilka.question.common.constant.RedisFix;
 import com.roilka.roilka.question.common.utils.CollectionUtil;
 import com.roilka.roilka.question.common.utils.HttpClientUtils;
+import com.roilka.roilka.question.common.utils.JsonConvertUtils;
 import com.roilka.roilka.question.common.utils.RedisUtils;
 import com.roilka.roilka.question.facade.response.BizBaseResponse;
 import com.roilka.roilka.question.facade.response.zhihu.GetHistoryToDayResponse;
@@ -40,7 +41,7 @@ public class AcecdoteController {
     public BizBaseResponse<Boolean> refreahHistoryToDay() {
         GetHistoryToDayResponse.ResultBean resultBean = new GetHistoryToDayResponse.ResultBean();
         Integer defaultRows = 500;
-        String url = " http://api.avatardata.cn/HistoryToday/LookUp";
+        String url = "http://api.avatardata.cn/HistoryToday/LookUp";
         Map<String, Object> body = new HashMap<>();
         GetHistoryToDayResponse response = null;
         for (int yue = 1; yue <= 12; yue++) {
@@ -58,7 +59,7 @@ public class AcecdoteController {
                         if (CollectionUtil.isNullOrEmpty(response.getResult())) {
                             continue;
                         }
-                        redisUtils.redisHashSet(RedisFix.HISTORYTODAY, yue + "-" + ri + "_" + type, response.getResult().toString());
+                        redisUtils.redisHashSet(RedisFix.HISTORYTODAY, yue + "-" + ri + "_" + type, JsonConvertUtils.objectToJson(response.getResult()));
                         page++;
                     } while (response.getResult().size() == 500);
                 }
