@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roilka.roilka.question.dal.dao.zhihu.AreaMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.roilka.roilka.question.dal.entity.zhihu.Area">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="parent_id" property="parentId" />
+        <result column="parent_name" property="parentName" />
+        <result column="area_code" property="areaCode" />
+        <result column="zip_code" property="zipCode" />
+        <result column="depth" property="depth" />
+    </resultMap>
+<insert id="insertSelective" databaseId="" parameterType="com.roilka.roilka.question.dal.entity.zhihu.Area">
+    insert into area
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null" >
+           id,
+        </if>
+        <if test="name != null" >
+            `name`,
+        </if>
+        <if test="parentId != null" >
+            parent_id,
+        </if>
+        <if test="parentName != null" >
+            parent_name,
+        </if>
+        <if test="areaCode != null" >
+            area_code,
+        </if>
+        <if test="zipCode != null" >
+            zip_code,
+        </if>
+        <if test="depth != null" >
+            depth
+        </if>
+
+    </trim>
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="id != null" >
+            #{id},
+        </if>
+        <if test="name != null" >
+            #{name},
+        </if>
+        <if test="parentId != null" >
+            #{parentId},
+        </if>
+        <if test="parentName != null" >
+            #{parentName},
+        </if>
+        <if test="areaCode != null" >
+            area_code,
+        </if>
+        <if test="zipCode != null" >
+            #{zipCode},
+        </if>
+        <if test="depth != null" >
+            #{depth}
+        </if>
+    </trim>
+
+</insert>
+</mapper>

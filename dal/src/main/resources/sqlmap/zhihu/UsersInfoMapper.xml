@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roilka.roilka.question.dal.dao.zhihu.UsersInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.roilka.roilka.question.dal.entity.zhihu.UsersInfo">
+        <result column="name" property="name" />
+        <result column="address" property="address" />
+        <result column="education" property="education" />
+        <result column="company" property="company" />
+        <result column="job" property="job" />
+        <result column="headline" property="headline" />
+        <result column="user_id" property="userId" />
+        <result column="answer" property="answer" />
+        <result column="question" property="question" />
+        <result column="article" property="article" />
+        <result column="favorite" property="favorite" />
+        <result column="agree" property="agree" />
+        <result column="thanked" property="thanked" />
+        <result column="following" property="following" />
+        <result column="followers" property="followers" />
+        <result column="topic" property="topic" />
+        <result column="columns" property="columns" />
+        <result column="sex" property="sex" />
+        <result column="updatetime" property="updatetime" />
+        <result column="weibo" property="weibo" />
+        <result column="token" property="token" />
+        <result column="index_url" property="indexUrl" />
+    </resultMap>
+
+    <select id="getList" resultMap="BaseResultMap" >
+        select  * from  users_info
+    </select>
+
+</mapper>
