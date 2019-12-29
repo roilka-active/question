@@ -12,7 +12,7 @@
         <result column="zip_code" property="zipCode" />
         <result column="depth" property="depth" />
     </resultMap>
-<insert id="insertSelective" databaseId="" parameterType="com.roilka.roilka.question.dal.entity.zhihu.Area">
+<!--<insert id="insertSelective" databaseId="" parameterType="com.roilka.roilka.question.dal.entity.zhihu.Area">
     insert into area
     <trim prefix="(" suffix=")" suffixOverrides=",">
         <if test="id != null" >
@@ -62,5 +62,5 @@
         </if>
     </trim>
 
-</insert>
+</insert>-->
 </mapper>

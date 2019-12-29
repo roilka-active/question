@@ -62,7 +62,8 @@ import java.util.stream.Collectors;
 public class ZhiHuController {
 
 
-    private static final String APPID = "5e5d2ee08f8885b5";
+    //private static final String APPID = "5e5d2ee08f8885b5";
+    private static final String APPID = "1caf236919dfbcad";
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     @Autowired
@@ -235,57 +236,16 @@ public class ZhiHuController {
         Set<String> provinceSet = redisUtils.redisHashKeys(RedisFix.AREA);
         int numThread = provinceSet.size();
         for (String province : provinceSet) {
-            read(list, province);
+            areaService.addAreaAsync(list,province);
         }
 
 
-        log.info("开始入库，size={}", list.size());
-        list.stream().forEach(record -> {
+        log.info("结束入库，size={}", list.size());
+       /* list.stream().forEach(record -> {
             areaService.addArea(record);
-        });
+        });*/
         return new BizBaseResponse<>(true);
     }
 
-    private void read(Set<Area> list, String province) {
-        log.info("build province,{}", province);
-        Long count = redisUtils.redisHashSize(RedisFix.AREA + province);
-        if (count == 0) {
-            return;
-        }
 
-        // 存入所有省份
-        buildArea(RedisFix.AREA, province, list);
-        Set<String> citySet = redisUtils.redisHashKeys(RedisFix.AREA + province);
-        int cityCount = citySet.size();
-        for (String city : citySet) {
-            log.info("build city,name ={},cityCount={}", city, cityCount);
-            cityCount--;
-            count = redisUtils.redisHashSize(RedisFix.AREA + province + ":" + city);
-            if (count == 0) {
-                continue;
-            }
-            // 存入城市
-            buildArea(RedisFix.AREA + province, city, list);
-            Set<String> townSet = redisUtils.redisHashKeys(RedisFix.AREA + province + ":" + city);
-            int townCount = townSet.size();
-            for (String town : townSet) {
-                // 存入乡镇
-                log.info("build town,id ={},cityCount = {},townCount={}", town, cityCount, townCount);
-                townCount--;
-                buildArea(RedisFix.AREA + province + ":" + city, town, list);
-            }
-        }
-    }
-
-    private void buildArea(String key, String hashKey, Set<Area> list) {
-        GetAreaDataResponse.ResultBean bean = redisUtils.redisHashGetWithInstance(key, hashKey, GetAreaDataResponse.ResultBean.class);
-        Area area = new Area();
-        area.setAreaCode(bean.getAreacode());
-        area.setDepth(bean.getDepth());
-        area.setId(bean.getId());
-        area.setName(bean.getName());
-        area.setParentId(bean.getParentid());
-        area.setZipCode(bean.getZipcode());
-        list.add(area);
-    }
 }

@@ -2,6 +2,8 @@ package com.roilka.roilka.question.domain.service.zhihu;
 
 import com.roilka.roilka.question.dal.entity.zhihu.Area;
 
+import java.util.Set;
+
 /**
  * @ClassName AreaService
  * @Description TODO
@@ -10,4 +12,6 @@ import com.roilka.roilka.question.dal.entity.zhihu.Area;
  **/
 public interface AreaService {
     Boolean addArea(Area area);
+
+    Boolean addAreaAsync(Set<Area> list, String province);
 }

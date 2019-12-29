@@ -1,11 +1,14 @@
 package com.roilka.roilka.question.api.controller.open;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.roilka.roilka.question.common.constant.RedisFix;
 import com.roilka.roilka.question.common.utils.CollectionUtil;
 import com.roilka.roilka.question.common.utils.HttpClientUtils;
 import com.roilka.roilka.question.common.utils.JsonConvertUtils;
 import com.roilka.roilka.question.common.utils.RedisUtils;
+import com.roilka.roilka.question.dal.entity.HistoryToday;
+import com.roilka.roilka.question.domain.service.zhihu.impl.HistoryTodayService;
 import com.roilka.roilka.question.facade.response.BizBaseResponse;
 import com.roilka.roilka.question.facade.response.zhihu.GetHistoryToDayResponse;
 import io.swagger.annotations.Api;
@@ -15,9 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @ClassName AcecdoteController
@@ -33,6 +34,8 @@ public class AcecdoteController {
     @Autowired
     private HttpClientUtils httpClientUtils;
 
+    @Autowired
+    private HistoryTodayService historyTodayService;
     @Autowired
     private RedisUtils redisUtils;
 
@@ -67,6 +70,37 @@ public class AcecdoteController {
         }
 
         log.info("test:{}", JSONObject.toJSON(resultBean));
+
+        return new BizBaseResponse<>(true);
+    }
+
+    @ApiOperation(value = "存储历史的今天信息")
+    @GetMapping("/storeHistoryToDay")
+    public BizBaseResponse<Boolean> storeHistoryToDay() {
+        Set<String> set = redisUtils.redisHashKeys(RedisFix.HISTORYTODAY);
+        HistoryToday historyToday;
+        Set<HistoryToday> setM = new HashSet<>();
+        Map<String, Object> map;
+        int count = 0;
+        for (String str : set) {
+            JSONArray arr = redisUtils.redisHashGetWithInstance(RedisFix.HISTORYTODAY, str, JSONArray.class);
+            for (Object obj : arr) {
+//                historyToday = JSONObject.toJavaObject((JSONObject)obj,HistoryToday.class);
+                map = (HashMap) obj;
+                historyToday = new HistoryToday();
+                historyToday.setDay((int) map.get("day"));
+                historyToday.setMonth((int) map.get("month"));
+                historyToday.setType((int) map.get("type"));
+                historyToday.setYear((int) map.get("year"));
+                historyToday.setTitle((String) map.get("title"));
+                setM.add(historyToday);
+                count++;
+                log.info("数据装配成功，count={},historyToday={}", count, historyToday);
+            }
+        }
+        log.info("start to store,size = {}", setM.size());
+        historyTodayService.saveBatch(setM);
+
 
         return new BizBaseResponse<>(true);
     }
