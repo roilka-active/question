@@ -13,5 +13,5 @@ import java.util.Set;
 public interface AreaService {
     Boolean addArea(Area area);
 
-    Boolean addAreaAsync(Set<Area> list, String province);
+    Boolean addAreaAsync( String province);
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -36,7 +37,8 @@ public class AreaServiceImpl implements AreaService {
 
     @Async
     @Override
-    public Boolean addAreaAsync(Set<Area> list, String province) {
+    public Boolean addAreaAsync( String province) {
+        Set<Area> list = new HashSet<>();
         log.info("build province,{}", province);
         Long count = redisUtils.redisHashSize(RedisFix.AREA + province);
         if (count == 0) {
@@ -60,12 +62,12 @@ public class AreaServiceImpl implements AreaService {
             int townCount = townSet.size();
             for (String town : townSet) {
                 // 存入乡镇
-                log.info("build town,id ={},cityCount = {},townCount={}", town, cityCount, townCount);
+                //log.info("build town,id ={},cityCount = {},townCount={}", town, cityCount, townCount);
                 townCount--;
                 buildArea(RedisFix.AREA + province + ":" + city, town, list);
             }
         }
-        log.info("开始入库，size={}", list.size());
+        log.info("开始入库，size={},list={}", list.size(),list);
         list.stream().forEach(record -> areaMapper.insert(record));
         return true;
     }

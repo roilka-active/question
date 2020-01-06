@@ -62,8 +62,8 @@ import java.util.stream.Collectors;
 public class ZhiHuController {
 
 
-    //private static final String APPID = "5e5d2ee08f8885b5";
-    private static final String APPID = "1caf236919dfbcad";
+    private static final String APPID = "5e5d2ee08f8885b5";
+//    private static final String APPID = "1caf236919dfbcad";
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     @Autowired
@@ -236,7 +236,7 @@ public class ZhiHuController {
         Set<String> provinceSet = redisUtils.redisHashKeys(RedisFix.AREA);
         int numThread = provinceSet.size();
         for (String province : provinceSet) {
-            areaService.addAreaAsync(list,province);
+            areaService.addAreaAsync(province);
         }
 
 
