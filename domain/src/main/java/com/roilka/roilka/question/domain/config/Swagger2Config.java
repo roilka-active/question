@@ -1,4 +1,4 @@
-package com.roilka.roilka.question.api.config;
+package com.roilka.roilka.question.domain.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

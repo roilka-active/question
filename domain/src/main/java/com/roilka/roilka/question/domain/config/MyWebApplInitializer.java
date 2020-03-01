@@ -1,4 +1,4 @@
-package com.roilka.roilka.question.api.config;
+package com.roilka.roilka.question.domain.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

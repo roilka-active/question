@@ -1,13 +1,9 @@
-package com.roilka.roilka.question.api.config;
+package com.roilka.roilka.question.domain.config;
 
-import com.roilka.roilka.question.api.testbeaninit.BussinessPerson;
-import com.roilka.roilka.question.dal.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;

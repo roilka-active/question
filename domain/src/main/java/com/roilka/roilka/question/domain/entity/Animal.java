@@ -1,4 +1,4 @@
-package com.roilka.roilka.question.api.testbeaninit;
+package com.roilka.roilka.question.domain.entity;
 
 /**
  * @author zhanghui

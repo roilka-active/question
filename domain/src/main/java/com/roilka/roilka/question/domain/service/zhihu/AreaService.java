@@ -1,6 +1,7 @@
 package com.roilka.roilka.question.domain.service.zhihu;
 
 import com.roilka.roilka.question.dal.entity.zhihu.Area;
+import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.Set;
 
@@ -13,5 +14,5 @@ import java.util.Set;
 public interface AreaService {
     Boolean addArea(Area area);
 
-    Boolean addAreaAsync(Set<Area> list, String province);
+    ListenableFuture<Integer> addAreaAsync(Set<Area> list, String province);
 }

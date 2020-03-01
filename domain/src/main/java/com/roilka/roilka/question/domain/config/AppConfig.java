@@ -1,11 +1,10 @@
-package com.roilka.roilka.question.api.config;
+package com.roilka.roilka.question.domain.config;
 
-import com.roilka.roilka.question.api.testbeaninit.BussinessPerson;
 import com.roilka.roilka.question.dal.entity.user.User;
+import com.roilka.roilka.question.domain.entity.BussinessPerson;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 /**
  * @ClassName AppConfig

@@ -1,14 +1,12 @@
 package com.roilka.roilka.question.api.redis;
 
-import com.roilka.roilka.question.api.testbeaninit.Animal;
-import com.roilka.roilka.question.api.testbeaninit.BussinessPerson;
+import com.roilka.roilka.question.domain.entity.Animal;
+import com.roilka.roilka.question.domain.entity.BussinessPerson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisZSetCommands;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Controller;
@@ -47,10 +45,11 @@ public class RedisController {
     @ApiOperation(value = "redis 测试String和Hash")
     @GetMapping("/testStringAndHash/{a}")
     @ResponseBody
-    public Object testBean(@PathVariable("a") String a){
+    public Object testBean(@PathVariable("a") String a) {
         bussinessPerson.service(a);
         return null;
     }
+
     @ApiOperation(value = "redis 测试String和Hash")
     @GetMapping("/testStringAndHash")
     @ResponseBody
@@ -137,13 +136,13 @@ public class RedisController {
         // 按值排序，请注意这个排序是按字符串排序
         Set<String> setLex = zsetOps.rangeByLex(range);
         // 删除元素
-        zsetOps.remove("value9","value2");
+        zsetOps.remove("value9", "value2");
         // 求分数
         Double score = zsetOps.score("value8");
         // 在下标区间下，按分数排序，同时返回value 和score
-        Set<ZSetOperations.TypedTuple<String>> rangeSet = zsetOps.rangeWithScores(1,6);
+        Set<ZSetOperations.TypedTuple<String>> rangeSet = zsetOps.rangeWithScores(1, 6);
         // 在分数区间下，按分数排序，同时返回value 和score
-        Set<ZSetOperations.TypedTuple<String>> scoreSet = zsetOps.rangeByScoreWithScores(0.2,0.6);
+        Set<ZSetOperations.TypedTuple<String>> scoreSet = zsetOps.rangeByScoreWithScores(0.2, 0.6);
 
         //
         // 按分数排序
@@ -159,31 +158,32 @@ public class RedisController {
 
         redisTemplate.opsForValue().set("key1", "value1");
         List list = (List) redisTemplate.executePipelined(new SessionCallback<Object>() {
-           @Override
-           public  Object execute(RedisOperations operations){
-               // 设置要监控 key1
-               operations.watch("key1");
-               // 开启事务，在exec命令执行前，全部都只进入队列
-               operations.multi();
-               operations.opsForValue().set("key2", "value2");
-               //operations.opsForValue().increment("key1",1);
-               // 获取值将为null，因为redis 只是把命令放入队列
-               Object value2 = operations.opsForValue().get("key2");
-               log.info("命令在队列，所以value为null，{}", value2);
-               operations.opsForValue().set("key3", "value3");
-               // 获取值将为null，因为redis 只是把命令放入队列
-               Object value3 = operations.opsForValue().get("key3");
-               log.info("命令在队列，所以value为null，{}", value3);
-               return operations.exec();
+            @Override
+            public Object execute(RedisOperations operations) {
+                // 设置要监控 key1
+                operations.watch("key1");
+                // 开启事务，在exec命令执行前，全部都只进入队列
+                operations.multi();
+                operations.opsForValue().set("key2", "value2");
+                //operations.opsForValue().increment("key1",1);
+                // 获取值将为null，因为redis 只是把命令放入队列
+                Object value2 = operations.opsForValue().get("key2");
+                log.info("命令在队列，所以value为null，{}", value2);
+                operations.opsForValue().set("key3", "value3");
+                // 获取值将为null，因为redis 只是把命令放入队列
+                Object value3 = operations.opsForValue().get("key3");
+                log.info("命令在队列，所以value为null，{}", value3);
+                return operations.exec();
 
             }
         });
-        String ss =new String("1");
+        String ss = new String("1");
         ss.hashCode();
         Map<String, Object> result = new HashMap<>();
         result.put("success", true);
         return result;
     }
+
     @ApiOperation(value = "redis 测试PipeLine")
     @GetMapping("/testPipeLine")
     @ResponseBody

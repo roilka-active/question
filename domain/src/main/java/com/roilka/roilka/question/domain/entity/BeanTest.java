@@ -1,7 +1,6 @@
-package com.roilka.roilka.question.api.testbeaninit;
+package com.roilka.roilka.question.domain.entity;
 
-import com.roilka.roilka.question.api.config.AppConfig;
-import com.roilka.roilka.question.dal.entity.user.User;
+import com.roilka.roilka.question.domain.config.AppConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;

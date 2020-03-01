@@ -9,7 +9,9 @@ import com.roilka.roilka.question.facade.response.zhihu.GetAreaDataResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.Set;
 
@@ -36,11 +38,11 @@ public class AreaServiceImpl implements AreaService {
 
     @Async
     @Override
-    public Boolean addAreaAsync(Set<Area> list, String province) {
+    public ListenableFuture<Integer> addAreaAsync(Set<Area> list, String province) {
         log.info("build province,{}", province);
         Long count = redisUtils.redisHashSize(RedisFix.AREA + province);
-        if (count == 0) {
-            return false;
+        if (count == null || count == 0) {
+            return new AsyncResult<Integer>(0);
         }
 
         // 存入所有省份
@@ -66,13 +68,23 @@ public class AreaServiceImpl implements AreaService {
             }
         }
         log.info("开始入库，size={}", list.size());
-        list.stream().forEach(record -> areaMapper.insert(record));
-        return true;
+        for (Area area : list) {
+            try {
+                areaMapper.insert(area);
+            } catch (Exception e) {
+                log.error("入库失败，area={}", area);
+            }
+        }
+
+        return new AsyncResult<Integer>(list.size());
     }
 
 
     private void buildArea(String key, String hashKey, Set<Area> list) {
         GetAreaDataResponse.ResultBean bean = redisUtils.redisHashGetWithInstance(key, hashKey, GetAreaDataResponse.ResultBean.class);
+        if (bean == null) {
+            return;
+        }
         Area area = new Area();
         area.setAreaCode(bean.getAreacode());
         area.setDepth(bean.getDepth());

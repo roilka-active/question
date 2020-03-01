@@ -1,7 +1,6 @@
-package com.roilka.roilka.question.api.testbeaninit;
+package com.roilka.roilka.question.domain.entity;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
