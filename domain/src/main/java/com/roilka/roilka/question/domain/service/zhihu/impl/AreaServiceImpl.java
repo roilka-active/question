@@ -68,7 +68,6 @@ public class AreaServiceImpl implements AreaService {
                 buildArea(RedisFix.AREA + province + ":" + city, town, list);
             }
         }
-<<<<<<< HEAD
         log.info("开始入库，size={}", list.size());
         for (Area area : list) {
             try {
@@ -79,11 +78,7 @@ public class AreaServiceImpl implements AreaService {
         }
 
         return new AsyncResult<Integer>(list.size());
-=======
-        log.info("开始入库，size={},list={}", list.size(),list);
-        list.stream().forEach(record -> areaMapper.insert(record));
-        return true;
->>>>>>> 836d31729ae5fdf750d13b340fe59fec4edd90e5
+
     }
 
 
