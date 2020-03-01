@@ -67,6 +67,7 @@ public class ZhiHuController {
 
     private static final String APPID = "5e5d2ee08f8885b5";
     //    private static final String APPID = "1caf236919dfbcad";
+
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     @Autowired

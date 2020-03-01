@@ -18,6 +18,22 @@ spring:
     filters: wall,mergeStat
     data-source-name: gunsdb
 
+  rabbitmq:
+    addresses: 192.168.222.101:5672
+    username: admin
+    password: admin123456
+    virtual-host: /
+    connection-timeout: 15000
+
+
+
+    listener:
+      simple:
+        acknowledge-mode: 'manual'
+        concurrency: 1
+        max-concurrency: 5
+
+
 #配置连接池属性
   redis:
     prefix: 'active-question:'
@@ -27,18 +43,18 @@ spring:
         max-idle: 10
         max-wait: 2000
         min-idle: 5
-  #配置redis 服务器属性
+    #配置redis 服务器属性
     port: 6379
     host: 39.98.153.159
     password: pwdredis123456
-  #Redis 连接超时 单位毫秒
+    #Redis 连接超时 单位毫秒
     timeout: 1000
 
 
 logging:
   config: classpath:logback-spring.xml
   file:
-      path: D:/nmyslog/nmys
+    path: D:/nmyslog/nmys
 
 
 mybatis-plus:

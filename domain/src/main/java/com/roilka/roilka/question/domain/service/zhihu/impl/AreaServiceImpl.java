@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -62,11 +63,12 @@ public class AreaServiceImpl implements AreaService {
             int townCount = townSet.size();
             for (String town : townSet) {
                 // 存入乡镇
-                log.info("build town,id ={},cityCount = {},townCount={}", town, cityCount, townCount);
+                //log.info("build town,id ={},cityCount = {},townCount={}", town, cityCount, townCount);
                 townCount--;
                 buildArea(RedisFix.AREA + province + ":" + city, town, list);
             }
         }
+<<<<<<< HEAD
         log.info("开始入库，size={}", list.size());
         for (Area area : list) {
             try {
@@ -77,6 +79,11 @@ public class AreaServiceImpl implements AreaService {
         }
 
         return new AsyncResult<Integer>(list.size());
+=======
+        log.info("开始入库，size={},list={}", list.size(),list);
+        list.stream().forEach(record -> areaMapper.insert(record));
+        return true;
+>>>>>>> 836d31729ae5fdf750d13b340fe59fec4edd90e5
     }
 
 
