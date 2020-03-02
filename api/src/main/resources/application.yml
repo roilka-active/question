@@ -71,3 +71,7 @@ mybatis-plus:
 
 common:
   enable-http-client: true
+
+mq:
+  rabbit:
+    address:

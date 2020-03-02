@@ -1,7 +1,7 @@
 package com.roilka.roilka.question.domain.config;
 
-import com.roilka.roilka.question.api.rabbitmq.HandleRabbitService;
 import com.roilka.roilka.question.common.utils.OsUtils;
+import com.roilka.roilka.question.domain.rabbitmq.HandleRabbitService;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -21,11 +21,11 @@ import java.io.IOException;
  * @Author changyou
  * @Date 2019/12/20 10:22
  **/
-@Configuration
+//@Configuration
 public class RabbitMQConfig {
 
 
-    @Value("${mq.rabbit.address}")
+    /*@Value("${mq.rabbit.address}")
     String address;
 
     @Value("${mq.rabbit.username}")
@@ -107,5 +107,5 @@ public class RabbitMQConfig {
         container.setMessageListener(handleService);//监听处理类
         return container;
     }
-
+*/
 }
