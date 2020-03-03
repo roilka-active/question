@@ -24,14 +24,12 @@ spring:
     password: admin123456
     virtual-host: /
     connection-timeout: 15000
-
-
-
     listener:
       simple:
         acknowledge-mode: 'manual'
         concurrency: 1
         max-concurrency: 5
+
 
 
 #配置连接池属性
@@ -55,6 +53,7 @@ logging:
   config: classpath:logback-spring.xml
   file:
     path: D:/nmyslog/nmys
+    name: question
 
 
 mybatis-plus:
@@ -74,4 +73,19 @@ common:
 
 mq:
   rabbit:
-    address:
+    address: "172.16.20.1:5672"
+    username: "test"
+    password: "itsme999"
+    exchange:
+      name: "roilka-active"
+    routingKey: "active.test"
+    queue:
+      size: 10
+    virtualHost: /dev
+
+  concurrent:
+    consumers:
+      count: 10
+
+  prefetch:
+    count: 5

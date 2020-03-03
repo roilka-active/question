@@ -20,6 +20,9 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -31,7 +34,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  **/
 @Configuration
 @EnableConfigurationProperties(value = {CommonProperties.class})
-public class CommonAutoConfiguration {
+public class CommonAutoConfiguration implements WebMvcConfigurer {
 
     @Autowired
     private CommonProperties commonProperties;
@@ -95,5 +98,10 @@ public class CommonAutoConfiguration {
         // 等待所有任务结束后再关闭线程池
         executor.setWaitForTasksToCompleteOnShutdown(true);
         return executor;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry){
+
     }
 }

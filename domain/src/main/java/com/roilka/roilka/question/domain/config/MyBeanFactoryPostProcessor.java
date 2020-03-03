@@ -14,11 +14,15 @@ package com.roilka.roilka.question.domain.config;/**
  * Modified By:
  */
 
+import com.roilka.roilka.question.domain.service.base.TestService;
+import com.roilka.roilka.question.domain.service.openapi.TestServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
 
 /**
  * @author zhanghui
@@ -29,7 +33,9 @@ import org.springframework.stereotype.Component;
 public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        BeanDefinition beanDefinition = beanFactory.getBeanDefinition("zhiHuController");
+        BeanDefinition beanDefinition = beanFactory.getBeanDefinition("usersInfoService");
         beanDefinition.getDependsOn();
+        TestService testService = new TestServiceImpl();
+        testService.say();
     }
 }

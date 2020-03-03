@@ -1,7 +1,7 @@
 package com.roilka.roilka.question.domain.config;
 
 import com.roilka.roilka.question.common.utils.OsUtils;
-import com.roilka.roilka.question.domain.rabbitmq.HandleRabbitService;
+import com.roilka.roilka.question.domain.commontools.rabbitmq.HandleRabbitService;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -10,8 +10,8 @@ import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
@@ -21,6 +21,7 @@ import java.io.IOException;
  * @Author changyou
  * @Date 2019/12/20 10:22
  **/
+@PropertySource("classpath:rabbit-mq.yml")
 //@Configuration
 public class RabbitMQConfig {
 
@@ -43,12 +44,12 @@ public class RabbitMQConfig {
 
     String exchangeName;
 
-    @Value("${mq.rabbit.size}")
+    @Value("${mq.rabbit.queue.size}")
 
     int queueSize;
 
 
-    @Value("${mq.concurrent.consumers}")
+    @Value("${mq.concurrent.consumers.count}")
 
 
     int concurrentConsumers;
@@ -94,7 +95,6 @@ public class RabbitMQConfig {
         }
         return queueNames;
     }
-
     //创建监听器，监听队列
     @Bean
     public SimpleMessageListenerContainer mqMessageContainer(HandleRabbitService handleService) throws AmqpException, IOException {

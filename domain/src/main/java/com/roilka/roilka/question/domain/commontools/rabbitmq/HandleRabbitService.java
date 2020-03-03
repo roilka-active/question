@@ -1,12 +1,11 @@
-package com.roilka.roilka.question.api.rabbitmq;
+package com.roilka.roilka.question.domain.commontools.rabbitmq;
 
 import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
-
-import static io.lettuce.core.protocol.CommandKeyword.BY;
+import org.springframework.stereotype.Component;
 
 /**
  * @ClassName HandleRabbitService
@@ -15,6 +14,7 @@ import static io.lettuce.core.protocol.CommandKeyword.BY;
  * @Date 2020/1/6 14:40
  **/
 @Slf4j
+@Component
 public class HandleRabbitService implements ChannelAwareMessageListener {
 
 

@@ -72,7 +72,7 @@ public class RegexUtils {
      */
     public static final String REGEX_IP            = "((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)";
 
-    /************** 以下摘自http://tool.oschina.net/regex **************/
+    /************** 以下摘自http://tools.oschina.net/regex **************/
 
     /**
      * 正则：双字节字符(包括汉字在内)
