@@ -14,6 +14,9 @@ package com.roilka.roilka.question.common.collection;/**
  * Modified By:
  */
 
+import com.roilka.roilka.question.common.base.BizRestException;
+
+import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -32,6 +35,10 @@ public class MapTest {
         }
         char a = '是';
         System.out.println(a);
+        Map<BizRestException,String> map = new HashMap<>();
+        int q = 2;
+        int w =4;
+        System.out.println(q ^ w);
     }
     public static Map<Integer, String> testTreeMap(){
         SortedMap<Integer,String> sortedMap = new TreeMap<>();

@@ -2,10 +2,13 @@ package com.roilka.roilka.question.common.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName CollectionUtil
@@ -302,5 +305,49 @@ public class CollectionUtil {
             result.add(list.subList(start, end > orgSize ? orgSize : end));
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        List<Bean> list = new ArrayList<>();
+        Bean bean = new Bean();
+        bean.setAddress("a");
+        bean.setCode(1);
+        bean.setName("11");
+        bean.setScore(21);
+        list.add(bean);
+        bean = new Bean();
+        bean.setAddress("b");
+        bean.setCode(1);
+        bean.setName("11");
+        bean.setScore(3);
+        list.add(bean);
+        bean = new Bean();
+        bean.setAddress("a");
+        bean.setCode(3);
+        bean.setName("2");
+        bean.setScore(2);
+        list.add(bean);
+        bean = new Bean();
+        bean.setAddress("2");
+        bean.setCode(5);
+        bean.setName("55");
+        bean.setScore(555);
+        list.add(bean);
+        //Map<Integer,String> map =list.stream().distinct().collect(Collectors.toMap(Bean::getCode, Bean::getName));
+        //System.out.println(map);
+        HashMap map1 = new HashMap();
+        map1.put(1, "fd");
+        String s = "I feel unhappy!";
+        int  h = 0;
+         h = (h = s.hashCode()) ^ (h >>> 16);
+         System.out.println(h);
+        ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap<>();
+    }
+    @Data
+    public static class Bean{
+        private int code;
+        private String name;
+        private Integer score;
+        private String address;
     }
 }
