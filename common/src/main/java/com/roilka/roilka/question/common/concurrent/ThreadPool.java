@@ -1,5 +1,6 @@
-package com.roilka.roilka.question.common.base;
+package com.roilka.roilka.question.common.concurrent;
 
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadFactory;
@@ -29,6 +30,20 @@ public class ThreadPool {
 
     ThreadPool(BlockingQueue<Runnable> workQueue) {
         this.workQueue = workQueue;
+    }
+
+    public void shutDown() {
+        Collection collection = new ArrayList();
+        Map map = new HashMap();
+        NavigableMap<Integer, String> sortedMap = new TreeMap<>();
+        sortedMap.put(2, "bb");
+        sortedMap.put(1, "aa");
+        sortedMap.put(4, "dd");
+        sortedMap.put(3, "cc");
+        System.out.println("sortedMap.floorEntry:"+sortedMap.floorEntry(2));
+        System.out.println("sortedMap.ceilingEntry:"+sortedMap.ceilingEntry(2));
+        System.out.println(sortedMap.computeIfAbsent(2,k -> "ws"));
+        System.out.println(sortedMap.floorEntry(2));
     }
 
     public static void main(String[] args) {

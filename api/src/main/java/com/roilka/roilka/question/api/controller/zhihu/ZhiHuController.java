@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPObject;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.roilka.roilka.question.common.base.BizRestException;
+import com.roilka.roilka.question.common.concurrent.NewThread;
 import com.roilka.roilka.question.common.constant.RedisFix;
 import com.roilka.roilka.question.common.enums.BizResponseCodeEnum;
 import com.roilka.roilka.question.common.utils.CollectionUtil;
@@ -46,10 +47,7 @@ import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 
@@ -265,26 +263,31 @@ public class ZhiHuController {
 
     @ApiOperation("存储区域信息")
     @GetMapping("store-area")
-    public BizBaseResponse<Boolean> storeArea() {
+    public BizBaseResponse<Boolean> storeArea() throws ExecutionException, InterruptedException {
         Set<Area> list = new HashSet<>();
         // 获取省集合
         Set<String> provinceSet = redisUtils.redisHashKeys(RedisFix.AREA);
-        int count = 0;
+        ExecutorService pool = Executors.newFixedThreadPool(10);
+        List<Future> futures = new ArrayList<Future>();
+        Callable mycallable = null;
+
         for (String province : provinceSet) {
             log.info("当前省份是 ：{}", province);
-            try {
-                count += areaService.addAreaAsync(list, province).get();
-            } catch (InterruptedException e) {
-                log.error("InterruptedException ", e);
-            } catch (ExecutionException e) {
-                log.error("ExecutionException ", e);
-            } catch (Exception e) {
-                log.error("Exception", e);
-            }
+                mycallable = () ->{
+                    int count = areaService.addAreaAsync(list, province).get();
+                    return count;
+                };
+                Future future = pool.submit(mycallable);
+
+                futures.add(future);
+               // count += areaService.addAreaAsync(list, province).get();
         }
 
+        for (Future future : futures){
+           log.info("当前计算结果是="+future.get().toString());
+        }
 
-        log.info("结束入库，size={}", count);
+//        log.info("结束入库，size={}", count);
        /* list.stream().forEach(record -> {
             areaService.addArea(record);
         });*/

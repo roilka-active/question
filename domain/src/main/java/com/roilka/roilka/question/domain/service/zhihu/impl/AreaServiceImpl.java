@@ -80,7 +80,48 @@ public class AreaServiceImpl implements AreaService {
         return new AsyncResult<Integer>(list.size());
 
     }
+    @Override
+    public Integer addAreaAsync(Set<Area> list, String province,boolean type) {
+        log.info("build province,{}", province);
+        Long count = redisUtils.redisHashSize(RedisFix.AREA + province);
+        if (count == null || count == 0) {
+            return 0;
+        }
 
+        // 存入所有省份
+        buildArea(RedisFix.AREA, province, list);
+        Set<String> citySet = redisUtils.redisHashKeys(RedisFix.AREA + province);
+        int cityCount = citySet.size();
+        for (String city : citySet) {
+            log.info("build city,name ={},cityCount={}", city, cityCount);
+            cityCount--;
+            count = redisUtils.redisHashSize(RedisFix.AREA + province + ":" + city);
+            if (count == 0) {
+                continue;
+            }
+            // 存入城市
+            buildArea(RedisFix.AREA + province, city, list);
+            Set<String> townSet = redisUtils.redisHashKeys(RedisFix.AREA + province + ":" + city);
+            int townCount = townSet.size();
+            for (String town : townSet) {
+                // 存入乡镇
+                //log.info("build town,id ={},cityCount = {},townCount={}", town, cityCount, townCount);
+                townCount--;
+                buildArea(RedisFix.AREA + province + ":" + city, town, list);
+            }
+        }
+        log.info("开始入库，size={}", list.size());
+        for (Area area : list) {
+            try {
+                areaMapper.insert(area);
+            } catch (Exception e) {
+                log.error("入库失败，area={}", area);
+            }
+        }
+
+        return list.size();
+
+    }
 
     private void buildArea(String key, String hashKey, Set<Area> list) {
         GetAreaDataResponse.ResultBean bean = redisUtils.redisHashGetWithInstance(key, hashKey, GetAreaDataResponse.ResultBean.class);

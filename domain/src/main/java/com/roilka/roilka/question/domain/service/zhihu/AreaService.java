@@ -15,4 +15,6 @@ public interface AreaService {
     Boolean addArea(Area area);
 
     ListenableFuture<Integer> addAreaAsync(Set<Area> list, String province);
+
+    Integer addAreaAsync(Set<Area> list, String province,boolean type);
 }
