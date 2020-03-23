@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.IntStream;
 
 /**
  * @ClassName NewThread
@@ -42,10 +43,11 @@ public class NewThread {
         new Thread(futureTask).start();
 
         Callable callable = () -> {
-            for (int i = 0; i < 15; i++) {
-                a++;
+            IntStream.rangeClosed(0, 10).forEach(i -> {
+                System.out.println("aaa");
                 System.out.println(Thread.currentThread().getName() + "\t" + Thread.currentThread().getId() + "  " + i);
-            }
+            });
+
             return a;
         };
         futureTask = new FutureTask<>(callable);
@@ -72,12 +74,13 @@ public class NewThread {
 
     public static void newRunnable() {
         new Thread(() -> {
-
             System.out.println("当前是 Thread-2");
-            for (int i = 0; i < 10; i++) {
+            IntStream.range(0, 10).forEach(i ->{
                 a++;
                 System.out.println(Thread.currentThread().getName() + "\t" + Thread.currentThread().getId() + "  " + i);
-            }
+            });
+
+
         }).start();
     }
 
