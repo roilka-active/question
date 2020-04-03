@@ -67,6 +67,10 @@
                 <artifactId>roilka-question-domain</artifactId>
                 <version>${roilke.question.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.</groupId>
+                <artifactId> spring-cloudstarter-sleuth</artifactId>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

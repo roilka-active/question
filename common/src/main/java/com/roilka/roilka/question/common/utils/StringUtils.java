@@ -168,4 +168,10 @@ public class StringUtils {
         }
         return orgStr.replaceAll("\\s*", "");
     }
+
+    public static void main(String[] args) {
+        Integer a = 0;
+        Integer b = new Integer(0);
+        System.out.println(a==b);
+    }
 }

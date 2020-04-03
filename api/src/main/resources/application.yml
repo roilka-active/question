@@ -17,9 +17,13 @@ spring:
     password: 111111
     filters: wall,mergeStat
     data-source-name: gunsdb
-
+  rabbit:
+    username: admin
+    host: 39.98.153.159
+    port: 5672
+    password: admin123456
   rabbitmq:
-    addresses: 192.168.222.101:5672
+    addresses: 39.98.153.159:5672
     username: admin
     password: admin123456
     virtual-host: /
@@ -71,10 +75,14 @@ mybatis-plus:
 common:
   enable-http-client: true
 
+
+
 mq:
   rabbit:
     address: "172.16.20.1:5672"
     username: "test"
+    host: "39.98.153.159"
+    port: 5672
     password: "itsme999"
     exchange:
       name: "roilka-active"

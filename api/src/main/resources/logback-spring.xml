@@ -19,6 +19,12 @@
     <!-- 彩色日志格式 -->
     <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 
+    <!--日志存储位置（读取配置文件的路径）-->
+    <springProperty scope="context" name="log_dir" source="log.path"/>
+    <springProperty name="rabbitmqHost" source="spring.rabbit.host"/>
+    <springProperty name="rabbitmqPort" source="spring.rabbit.port"/>
+    <springProperty name="rabbitmqUsername" source="spring.rabbit.username"/>
+    <springProperty name="rabbitmqPassword" source="spring.rabbit.password"/>
 
     <!--输出到控制台-->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -32,6 +38,31 @@
             <charset>UTF-8</charset>
         </encoder>
     </appender>
+
+    <!-- 输出到 RabbitMq-->
+    <appender name="AMQP" class="org.springframework.amqp.rabbit.logback.AmqpAppender">
+
+        <!--Layout（纯文本）而不是格式化的JSON -->
+        <layout>
+            <pattern>
+                <![CDATA[%d{yyyy-MM-dd HH:mm:ss} [%thread] [%class:%line] %-5level %logger - %msg%n ]]>
+            </pattern>
+        </layout>
+        <host>${rabbitmqHost}</host>
+        <port>${rabbitmqPort}</port>
+        <username>${rabbitmqUsername}</username>
+        <password>${rabbitmqPassword}</password>
+
+        <declareExchange>false</declareExchange>
+        <exchangeType>direct</exchangeType>
+        <exchangeName>log.exchange.direct</exchangeName>
+        <routingKeyPattern>logDirectQueue</routingKeyPattern>
+        <generateId>true</generateId>
+        <charset>UTF-8</charset>
+        <durable>false</durable>
+        <deliveryMode>NON_PERSISTENT</deliveryMode>
+    </appender>
+
 
 
     <!--输出到文件-->

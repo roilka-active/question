@@ -51,12 +51,13 @@ public class LongEventMain {
         LongEventProducer producer = new LongEventProducer(ringBuffer);
 
         ByteBuffer bb = ByteBuffer.allocate(8);
-        for (long l = 0; true; l++) {
+        for (long l = 0; l <20; l++) {
             //存入数据
             bb.putLong(0, l);
             producer.onData(bb);
             Thread.sleep(1000);
         }
+
     }
 
 }
