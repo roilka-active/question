@@ -5,7 +5,10 @@ server:
 question:
   swagger-open: true                #是否开启swagger (true/false)
 
-
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://39.98.153.159:1001/eureka/
 # Mysql数据库
 spring:
   application:
