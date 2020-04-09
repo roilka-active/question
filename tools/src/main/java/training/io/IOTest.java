@@ -17,6 +17,9 @@ package training.io;/**
 import training.tools.utils.SysTools;
 
 import java.io.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  * @author zhanghui
@@ -36,5 +39,7 @@ public class IOTest {
         SysTools._out(s,"这是文件里读出来的：");
         FileReader fileReader = new FileReader(new File(prePath + "\\sensi_words.txt"));
         SysTools._out(fin.getFD(),"文件描述");
+
+
     }
 }

@@ -49,7 +49,7 @@ public class Employee implements Cloneable{
     }
 
     public void setSalary(Double salary) {
-        System.out.println("我是父类");
+        //System.out.println("我是父类");
         this.salary = salary;
     }
 

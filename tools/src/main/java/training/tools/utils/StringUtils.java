@@ -14,7 +14,12 @@ package training.tools.utils;/**
  * Modified By:
  */
 
-import java.util.Random;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
+
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,7 +61,7 @@ public class StringUtils {
      * @return
      */
     public static String genRandomStr(String range, int len) {
-        if (isBlank(range) || len <= 0){
+        if (isBlank(range) || len <= 0) {
             return "";
         }
 
@@ -106,10 +111,9 @@ public class StringUtils {
             for (int i = 0; i < len - strLen; ++i) {
                 tmpResult = tmpResult + padChar;
             }
-            if ("L".equalsIgnoreCase(direction)){
+            if ("L".equalsIgnoreCase(direction)) {
                 result = tmpResult + result;
-            }
-            else {
+            } else {
                 result = result + tmpResult;
             }
         }
@@ -204,8 +208,39 @@ public class StringUtils {
         return index;
     }
 
+    public static Comparable findMax(Comparable[] arr) {
+        int maxIndex = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].compareTo(arr[maxIndex]) > 0) {
+                maxIndex = i;
+            }
+        }
+        return arr[maxIndex];
+    }
 
     public static void main(String[] args) {
         System.out.println(deleteWhitespace(" a b c defg  g    "));
+       // Shape[] sh = {new Circle(2.0), new Text("fds")};
+        List linkedList = new LinkedList();
+        linkedList.add(1);
+        linkedList.add(2);
+        linkedList.add(3);
+        linkedList.add(4);
+        List arrayList = new ArrayList(Collections.nCopies(4,6));
+        ListIterator iterator = linkedList.listIterator();
+        Iterator iterator1 = arrayList.iterator();
+            while (iterator.hasPrevious() && iterator1.hasNext()){
+                iterator.add(iterator1.next());
+
+
+                SysTools._out(linkedList);
+                SysTools._out(iterator.previous());
+            }
+
+
+        SysTools._out(linkedList);
+        Collections.fill(linkedList,7);
+
+        SysTools._out(linkedList);
     }
 }
