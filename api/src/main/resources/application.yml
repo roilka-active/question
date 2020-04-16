@@ -6,12 +6,12 @@ question:
   swagger-open: true                #是否开启swagger (true/false)
 
 
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    serviceUrl:
-      defaultZone: http://39.98.153.159:1001/eureka/
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    serviceUrl:
+#      defaultZone: http://39.98.153.159:1001/eureka/
 # Mysql数据库
 spring:
   application:
@@ -85,11 +85,11 @@ common:
 
 mq:
   rabbit:
-    address: "172.16.20.1:5672"
-    username: "test"
+    address: "39.98.153.159:5672"
+    username: "admin"
     host: "39.98.153.159"
     port: 5672
-    password: "itsme999"
+    password: "admin123456"
     exchange:
       name: "roilka-active"
     routingKey: "active.test"

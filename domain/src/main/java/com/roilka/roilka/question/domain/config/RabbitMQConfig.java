@@ -8,10 +8,7 @@ import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 
 import java.io.IOException;
 
@@ -21,12 +18,11 @@ import java.io.IOException;
  * @Author changyou
  * @Date 2019/12/20 10:22
  **/
-@PropertySource("classpath:rabbit-mq.yml")
-//@Configuration
+@Configuration
 public class RabbitMQConfig {
 
 
-    /*@Value("${mq.rabbit.address}")
+    @Value("${mq.rabbit.address}")
     String address;
 
     @Value("${mq.rabbit.username}")
@@ -57,10 +53,7 @@ public class RabbitMQConfig {
     @Value("${mq.prefetch.count}")
     int prefetchCount;
 
-    //创建mq连接
-
-    @Bean(name = "connectionFactory")
-    public ConnectionFactory connectionFactory() {
+    private ConnectionFactory buildConnectionFactory(){
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
 
         connectionFactory.setUsername(username);
@@ -72,7 +65,21 @@ public class RabbitMQConfig {
         connectionFactory.setAddresses(address);
         return connectionFactory;
     }
+    //创建mq连接
 
+    @Bean(name = "connectionFactory")
+    @Primary
+    public ConnectionFactory connectionFactory() {
+
+        return buildConnectionFactory();
+    }
+//创建mq连接
+
+    @Bean(name = "test-consumer-connection-factory")
+    public ConnectionFactory consumerConnectionFactory() {
+
+        return buildConnectionFactory();
+    }
     //监听处理类
     @Bean
     @Scope("prototype")
@@ -107,5 +114,4 @@ public class RabbitMQConfig {
         container.setMessageListener(handleService);//监听处理类
         return container;
     }
-*/
 }

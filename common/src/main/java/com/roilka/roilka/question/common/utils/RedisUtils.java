@@ -1633,8 +1633,9 @@ public class RedisUtils {
         try {
             String value = UUID.randomUUID().toString();
             boolean lockStat = redis.execute((RedisCallback<Boolean>) connection -> {
-                return connection.set(key.getBytes(Charset.forName("UTF-8")), value.getBytes(Charset.forName("UTF-8")),
+                connection.set(key.getBytes(Charset.forName("UTF-8")), value.getBytes(Charset.forName("UTF-8")),
                         Expiration.milliseconds(timeoutSeconds * 1000), RedisStringCommands.SetOption.SET_IF_ABSENT);
+                return true;
             });
 
             if (lockStat) {

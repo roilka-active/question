@@ -8,4 +8,5 @@ package com.roilka.roilka.question.common.concurrent.entity;
  **/
 public interface Hello {
     void morning(String name);
+    void bye(String a,String b,String... arr);
 }

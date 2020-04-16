@@ -34,7 +34,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  **/
 @Configuration
 @EnableConfigurationProperties(value = {CommonProperties.class})
-public class CommonAutoConfiguration implements WebMvcConfigurer {
+public class CommonAutoConfiguration extends WebMvcConfigurerAdapter {
 
     @Autowired
     private CommonProperties commonProperties;
