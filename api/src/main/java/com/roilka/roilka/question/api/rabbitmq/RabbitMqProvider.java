@@ -14,6 +14,6 @@ public class RabbitMqProvider {
     @Autowired
     ConnectionFactory connectionFactory;
     public void senMessage(){
-        
+
     }
 }

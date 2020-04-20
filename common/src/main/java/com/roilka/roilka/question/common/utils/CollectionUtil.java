@@ -350,4 +350,5 @@ public class CollectionUtil {
         private Integer score;
         private String address;
     }
+
 }
