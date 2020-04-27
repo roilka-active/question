@@ -21,4 +21,5 @@ public interface RedisFix {
 
     String HISTORYTODAY = ACECDOTE + "historytoday:";
 
+    String HISTORY_LIST = HISTORYTODAY + "_list";
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @Author zhanghui1
  * @Date 2020/4/16 18:36
  **/
-@Component
+//@Component
 public class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationContext {
     public MyClassPathXmlApplicationContext(String... configLocation){
         super(configLocation);

@@ -11,5 +11,8 @@ import org.springframework.context.support.GenericApplicationContext;
 public class GetBeanCustom {
     public static void main(String[] args) {
         GenericApplicationContext ac = new GenericApplicationContext();
+        Object o = new Object();
+        o.hashCode();
+        o.equals(null);
     }
 }

@@ -2,6 +2,7 @@ package com.roilka.roilka.question.api.controller.open;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.roilka.roilka.question.common.constant.RedisFix;
 import com.roilka.roilka.question.common.utils.CollectionUtil;
 import com.roilka.roilka.question.common.utils.HttpClientUtils;
@@ -9,16 +10,23 @@ import com.roilka.roilka.question.common.utils.JsonConvertUtils;
 import com.roilka.roilka.question.common.utils.RedisUtils;
 import com.roilka.roilka.question.dal.entity.HistoryToday;
 import com.roilka.roilka.question.domain.service.zhihu.impl.HistoryTodayService;
+import com.roilka.roilka.question.facade.request.base.BizBaseRequest;
+import com.roilka.roilka.question.facade.request.open.GetHistoryToDayPageRequest;
+import com.roilka.roilka.question.facade.response.BasePageResponse;
 import com.roilka.roilka.question.facade.response.BizBaseResponse;
+import com.roilka.roilka.question.facade.response.open.HistoryToDayResponse;
 import com.roilka.roilka.question.facade.response.zhihu.GetHistoryToDayResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName AcecdoteController
@@ -27,7 +35,8 @@ import java.util.*;
  * @Date 2019/12/26 19:27
  **/
 @Slf4j
-@RestController("/acecdote")
+@RestController()
+@RequestMapping("/acecdote")
 @Api(tags = "奇闻异事管理接口")
 public class AcecdoteController {
 
@@ -103,5 +112,39 @@ public class AcecdoteController {
 
 
         return new BizBaseResponse<>(true);
+    }
+
+    @ApiOperation(value = "分页查询历史的今天信息")
+    @GetMapping("/flushHistoryList")
+    public BizBaseResponse<Boolean> flushHistoryList() {
+        List<HistoryToday> list = historyTodayService.list();
+        List<String> col = new ArrayList<>();
+        for (HistoryToday historyToday : list) {
+            col.add(JsonConvertUtils.objectToJson(historyToday));
+        }
+        stringRedisTemplate.opsForList().leftPushAll(RedisFix.HISTORY_LIST,col);
+        return new BizBaseResponse<>(true);
+    }
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
+    @ApiOperation(value = "分页查询历史的今天信息")
+    @PostMapping("/getPageList")
+    public BizBaseResponse<BasePageResponse<HistoryToDayResponse>> getPageList(@RequestBody @Valid BizBaseRequest<GetHistoryToDayPageRequest> baseRequest) {
+        GetHistoryToDayPageRequest request = baseRequest.getPostData();
+        int start = (request.getPageNum() - 1) * request.getPageSize();
+        int end = request.getPageNum() * request.getPageSize() -1;
+        List<String> list = stringRedisTemplate.opsForList().range(RedisFix.HISTORY_LIST,start , end);
+       List<HistoryToDayResponse> responseList= list.stream().map(record ->{
+            HistoryToday historyToday = JsonConvertUtils.json2Object(JSONObject.parseObject(record),HistoryToday.class);
+            HistoryToDayResponse response = new HistoryToDayResponse();
+            BeanUtils.copyProperties(historyToday, response);
+            return response;
+        }).collect(Collectors.toList());
+       BasePageResponse basePageResponse = new BasePageResponse();
+       basePageResponse.setTotal(stringRedisTemplate.opsForList().size(RedisFix.HISTORY_LIST));
+       basePageResponse.setResultList(responseList);
+       return new BizBaseResponse<>(basePageResponse);
     }
 }
