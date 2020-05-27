@@ -8,7 +8,7 @@
   - 部分业务场景
 
 
-- [实操代码](common/src/main/java/com/roilka/roilka/question/common/collection/LRU.java)
+- [实操代码](./common/src/main/java/com/roilka/roilka/question/common/collection/LRU.java)
 - 代码展示
 ```java
 import java.util.LinkedHashMap;
