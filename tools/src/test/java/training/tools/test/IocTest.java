@@ -17,14 +17,18 @@ package training.tools.test;/**
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import training.spring.config.MainConfig;
 import training.tools.spring.ioc.IocContainer;
 import training.tools.spring.ioc.car.Audi;
 import training.tools.spring.ioc.car.Buick;
 import training.tools.spring.ioc.humen.Humen;
 import training.tools.spring.ioc.humen.LiSi;
 import training.tools.spring.ioc.humen.ZhangSan;
+
+import java.util.stream.Stream;
 
 /**
  * @author zhanghui
@@ -57,4 +61,10 @@ public class IocTest {
         System.out.println("bean=" + bean);
     }
 
+    @Test
+    public void test01(){
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+        Stream.of(beanDefinitionNames).forEach(System.out::println);
+    }
 }

@@ -41,5 +41,8 @@ public class IOTest {
         SysTools._out(fin.getFD(),"文件描述");
 
 
+       /* InputStreamReader in = new InputStreamReader(System.in);
+
+        SysTools._out(in.read());*/
     }
 }
