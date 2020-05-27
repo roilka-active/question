@@ -39,6 +39,16 @@ public class MapTest {
         int q = 2;
         int w =4;
         System.out.println(q ^ w);
+        LRU<String,Integer> lru = new LRU<>(5);
+        lru.put("key-1", 1);
+        lru.put("key-2", 2);
+        lru.put("key-3", 3);
+        lru.put("key-4", 4);
+        lru.put("key-5", 5);
+        lru.print();
+        lru.get("key-1");
+        lru.put("key-6", 6);
+        lru.print();
     }
     public static Map<Integer, String> testTreeMap(){
         SortedMap<Integer,String> sortedMap = new TreeMap<>();

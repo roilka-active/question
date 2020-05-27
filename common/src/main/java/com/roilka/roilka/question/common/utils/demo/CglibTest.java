@@ -29,6 +29,7 @@ public class CglibTest {
         aList.add(3);
         List<Integer> bList = aList.stream().collect(Collectors.toList());
         bList.remove(1);
+        System.out.println(3|9);
     }
 
     public static void testMethodInterceptor(){

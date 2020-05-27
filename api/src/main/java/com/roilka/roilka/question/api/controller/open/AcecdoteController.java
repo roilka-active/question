@@ -36,8 +36,8 @@ import java.util.stream.Collectors;
  **/
 @Slf4j
 @RestController()
-@RequestMapping("/acecdote")
-@Api(tags = "奇闻异事管理接口")
+@RequestMapping("/area")
+@Api(tags = "省市区域管理接口")
 public class AcecdoteController {
 
     @Autowired
@@ -48,9 +48,9 @@ public class AcecdoteController {
     @Autowired
     private RedisUtils redisUtils;
 
-    @ApiOperation(value = "刷新历史的今天信息")
-    @GetMapping("/refreahHistoryToDay")
-    public BizBaseResponse<Boolean> refreahHistoryToDay() {
+    @ApiOperation(value = "刷新区域信息到redis")
+    @GetMapping("/refreahAreaToRedis")
+    public BizBaseResponse<Boolean> refreahAreaToRedis() {
         GetHistoryToDayResponse.ResultBean resultBean = new GetHistoryToDayResponse.ResultBean();
         Integer defaultRows = 500;
         String url = "http://api.avatardata.cn/HistoryToday/LookUp";
@@ -79,72 +79,12 @@ public class AcecdoteController {
         }
 
         log.info("test:{}", JSONObject.toJSON(resultBean));
-
+        ArrayList l = new ArrayList<String>();
+        l.add("s");
+        Vector vector = new Vector();
+        vector.add("a");
         return new BizBaseResponse<>(true);
     }
 
-    @ApiOperation(value = "存储历史的今天信息")
-    @GetMapping("/storeHistoryToDay")
-    public BizBaseResponse<Boolean> storeHistoryToDay() {
-        Set<String> set = redisUtils.redisHashKeys(RedisFix.HISTORYTODAY);
-        HistoryToday historyToday;
-        Set<HistoryToday> setM = new HashSet<>();
-        Map<String, Object> map;
-        int count = 0;
-        for (String str : set) {
-            JSONArray arr = redisUtils.redisHashGetWithInstance(RedisFix.HISTORYTODAY, str, JSONArray.class);
-            for (Object obj : arr) {
-//                historyToday = JSONObject.toJavaObject((JSONObject)obj,HistoryToday.class);
-                map = (HashMap) obj;
-                historyToday = new HistoryToday();
-                historyToday.setDay((int) map.get("day"));
-                historyToday.setMonth((int) map.get("month"));
-                historyToday.setType((int) map.get("type"));
-                historyToday.setYear((int) map.get("year"));
-                historyToday.setTitle((String) map.get("title"));
-                setM.add(historyToday);
-                count++;
-                log.info("数据装配成功，count={},historyToday={}", count, historyToday);
-            }
-        }
-        log.info("start to store,size = {}", setM.size());
-        historyTodayService.saveBatch(setM);
 
-
-        return new BizBaseResponse<>(true);
-    }
-
-    @ApiOperation(value = "分页查询历史的今天信息")
-    @GetMapping("/flushHistoryList")
-    public BizBaseResponse<Boolean> flushHistoryList() {
-        List<HistoryToday> list = historyTodayService.list();
-        List<String> col = new ArrayList<>();
-        for (HistoryToday historyToday : list) {
-            col.add(JsonConvertUtils.objectToJson(historyToday));
-        }
-        stringRedisTemplate.opsForList().leftPushAll(RedisFix.HISTORY_LIST,col);
-        return new BizBaseResponse<>(true);
-    }
-
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
-
-    @ApiOperation(value = "分页查询历史的今天信息")
-    @PostMapping("/getPageList")
-    public BizBaseResponse<BasePageResponse<HistoryToDayResponse>> getPageList(@RequestBody @Valid BizBaseRequest<GetHistoryToDayPageRequest> baseRequest) {
-        GetHistoryToDayPageRequest request = baseRequest.getPostData();
-        int start = (request.getPageNum() - 1) * request.getPageSize();
-        int end = request.getPageNum() * request.getPageSize() -1;
-        List<String> list = stringRedisTemplate.opsForList().range(RedisFix.HISTORY_LIST,start , end);
-       List<HistoryToDayResponse> responseList= list.stream().map(record ->{
-            HistoryToday historyToday = JsonConvertUtils.json2Object(JSONObject.parseObject(record),HistoryToday.class);
-            HistoryToDayResponse response = new HistoryToDayResponse();
-            BeanUtils.copyProperties(historyToday, response);
-            return response;
-        }).collect(Collectors.toList());
-       BasePageResponse basePageResponse = new BasePageResponse();
-       basePageResponse.setTotal(stringRedisTemplate.opsForList().size(RedisFix.HISTORY_LIST));
-       basePageResponse.setResultList(responseList);
-       return new BizBaseResponse<>(basePageResponse);
-    }
 }

@@ -6,8 +6,11 @@ import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 时间工具类
@@ -180,6 +183,20 @@ public class DateUtils {
     }
 
     public static void main(String[] args) {
+        List<Integer> a = new ArrayList<>();
+        a.add(1);
+        a.add(2);
+        a.add(3);
+        List<Integer> b = new ArrayList<>();
+        b.add(4);
+        b.add(2);
+        b.add(3);
+//        a.removeAll(b);
+//        System.out.println("a:"+a+"/r b:"+b);
+//        b.removeAll(a);
+//        System.out.println("a:"+a+"/r b:"+b);
+      List<Integer> re =   a.stream().filter(r -> r >2).collect(Collectors.toList());
+        System.out.println(re);
         System.out.println(getAfterHour(new Date(), 20000));
     }
 
