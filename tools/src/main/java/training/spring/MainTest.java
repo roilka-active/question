@@ -17,6 +17,7 @@ package training.spring;/**
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import training.spring.config.MainConfig;
+import training.spring.config.MainConfig2;
 import training.spring.entity.Person;
 
 import java.util.stream.Stream;

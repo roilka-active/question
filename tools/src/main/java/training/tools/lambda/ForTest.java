@@ -4,6 +4,8 @@ import training.tools.javase.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @ClassName ForTest
@@ -13,8 +15,8 @@ import java.util.List;
  */
 public class ForTest {
     public static void main(String[] args) {
-        List<Employee> userList = initList(10000);
-        for (int i = 1; i < 11; i++) {
+        List<Employee> userList = initList(10);
+        for (int i = 1; i < 2; i++) {
             System.out.println("--------------------第" + i + "次");
             long t1 = System.nanoTime();
 
@@ -50,6 +52,14 @@ public class ForTest {
             user.setSalary(user.getSalary() + 1);
             userList.forEach(h -> h.hashCode());
         });
+        Stream<Employee> peek = userList.stream().peek(e -> e.setSalary(e.getSalary() + 1));
+        peek.forEach(System.out::println);
+        Stream.of("one", "two", "three", "four")
+                .filter(e -> e.length() > 3)
+                .peek(e -> System.out.println("Filtered value: " + e))
+                .map(String::toUpperCase)
+                .peek(e -> System.out.println("Mapped value: " + e))
+                .collect(Collectors.toList());
     }
 
     /**

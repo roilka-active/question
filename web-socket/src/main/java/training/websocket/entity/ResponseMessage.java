@@ -7,7 +7,7 @@ package training.websocket.entity;/**
  * <p>
  * Date: Created in 2019/7/24 20:56
  * <p>
- * Company: tuhu
+ * Company: roilka
  * <p>
  * Copyright: Copyright (c) 2019
  * <p>

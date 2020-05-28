@@ -7,27 +7,26 @@ package training.tools.test;/**
  * <p>
  * Date: Created in 2019/9/25 22:50
  * <p>
- * Company: tuhu
+ * Company: roilka
  * <p>
  * Copyright: Copyright (c) 2019
  * <p>
  * Modified By:
  */
 
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.env.Environment;
 import training.spring.config.MainConfig;
+import training.spring.config.MainConfig2;
+import training.spring.entity.Person;
 import training.tools.spring.ioc.IocContainer;
-import training.tools.spring.ioc.car.Audi;
-import training.tools.spring.ioc.car.Buick;
-import training.tools.spring.ioc.humen.Humen;
-import training.tools.spring.ioc.humen.LiSi;
-import training.tools.spring.ioc.humen.ZhangSan;
 
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -66,5 +65,27 @@ public class IocTest {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
         String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
         Stream.of(beanDefinitionNames).forEach(System.out::println);
+    }
+
+    /**
+     *  验证bean的不同作用域
+     * @scope
+     *  单例下，使用的是同一个对象
+     *  原型下：ioc容器启动的时候并不会去调用方法去创建实例，而是每次获取都会创建一个新的对象
+     */
+    @Test
+    public void test02(){
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig2.class);
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+        Environment environment = applicationContext.getEnvironment();
+        String property = environment.getProperty("os.name");
+        System.out.println("当前系统是："+property.toString());
+        Stream.of(beanDefinitionNames).forEach(System.out::println);
+        Person bean = applicationContext.getBean(Person.class);
+        Person bean2 = applicationContext.getBean(Person.class);
+        System.out.println(bean == bean2);
+        Map<String, Person> beansOfType = applicationContext.getBeansOfType(Person.class);
+
+
     }
 }

@@ -7,7 +7,7 @@ package training.websocket.interceptor;/**
  * <p>
  * Date: Created in 2019/8/6 15:50
  * <p>
- * Company: tuhu
+ * Company: roilka
  * <p>
  * Copyright: Copyright (c) 2019
  * <p>

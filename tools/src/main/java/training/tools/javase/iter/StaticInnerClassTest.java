@@ -7,7 +7,7 @@ package training.tools.javase.iter;/**
  * <p>
  * Date: Created in 2019/10/11 0:18
  * <p>
- * Company: tuhu
+ * Company: roilka
  * <p>
  * Copyright: Copyright (c) 2019
  * <p>

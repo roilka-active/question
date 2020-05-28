@@ -7,7 +7,7 @@ package com.roilka.websocket.properties;/**
  * <p>
  * Date: Created in 2019/8/6 18:22
  * <p>
- * Company: tuhu
+ * Company: roilka
  * <p>
  * Copyright: Copyright (c) 2019
  * <p>

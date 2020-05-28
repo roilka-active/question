@@ -7,7 +7,7 @@ package training.concurrent;/**
  * <p>
  * Date: Created in 2020/1/30 17:23
  * <p>
- * Company: tuhu
+ * Company: roilka
  * <p>
  * Copyright: Copyright (c) 2019
  * <p>

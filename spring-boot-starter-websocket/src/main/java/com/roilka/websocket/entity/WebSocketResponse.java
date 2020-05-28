@@ -7,7 +7,7 @@ package com.roilka.websocket.entity;/**
  * <p>
  * Date: Created in 2019/8/7 9:51
  * <p>
- * Company: tuhu
+ * Company: roilka
  * <p>
  * Copyright: Copyright (c) 2019
  * <p>
