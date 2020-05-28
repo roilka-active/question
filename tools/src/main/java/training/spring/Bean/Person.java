@@ -1,4 +1,4 @@
-package training.spring.entity;
+package training.spring.Bean;
 
 import lombok.Data;
 

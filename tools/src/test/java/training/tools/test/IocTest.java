@@ -20,13 +20,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.env.Environment;
+import training.spring.Bean.Blue;
 import training.spring.config.MainConfig;
 import training.spring.config.MainConfig2;
-import training.spring.entity.Person;
+import training.spring.Bean.Person;
 import training.tools.spring.ioc.IocContainer;
 
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -53,6 +53,23 @@ public class IocTest {
         Humen liSi = (Humen) iocContainer.getBean("liSi");
         liSi.goHome();
     }*/
+    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+    @Test
+    public void testImport(){
+        printBeans(applicationContext);
+        Blue bean = applicationContext.getBean(Blue.class);
+        System.out.println(bean);
+        // 工厂Bean获取的是调用getObject创建的对象
+        Object colorFactoryBean = applicationContext.getBean("colorFactoryBean");
+
+
+    }
+
+    private void printBeans(ApplicationContext context){
+        System.out.println("开始打印Bean。。。");
+        String[] beanDefinitionNames = context.getBeanDefinitionNames();
+        Stream.of(beanDefinitionNames).forEach(System.out::println);
+    }
     @Test
     public void test() {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");

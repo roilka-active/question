@@ -16,12 +16,12 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 import java.util.stream.Stream;
 
 /**
- * @ClassName LinuxCondition
+ * @ClassName WindowsCondition
  * @Description TODO
  * @Author zhanghui1
  * @Date 2020/5/28 13:38
  **/
-public class LinuxCondition implements Condition {
+public class WindowsCondition implements Condition {
 
     /**
      *
@@ -41,7 +41,7 @@ public class LinuxCondition implements Condition {
 
         String property = environment.getProperty("os.name");
 //
-        if (property.toLowerCase().contains("linux")){
+        if (property.toLowerCase().contains("windows")){
             return true;
         }
         return false;
