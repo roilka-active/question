@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicStampedReference;
 /**
  * @ClassName AtomicTest
  * @Description TODO
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/4/22 18:56
  **/
 public class AtomicTest {

@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * @ClassName WaitNotifyTest
  * @Description 线程等待唤醒测试
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/3/23 10:37
  **/
 public class WaitNotifyTest {

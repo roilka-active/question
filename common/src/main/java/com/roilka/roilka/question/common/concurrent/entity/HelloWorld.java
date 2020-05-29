@@ -3,7 +3,7 @@ package com.roilka.roilka.question.common.concurrent.entity;
 /**
  * @ClassName HelloWorld
  * @Description TODO
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/4/13 18:51
  **/
 public class HelloWorld implements Hello {

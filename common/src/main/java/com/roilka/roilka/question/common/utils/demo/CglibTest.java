@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * @ClassName CglibTest
  * @Description cglib 动态代理
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/4/14 10:43
  **/
 public class CglibTest {

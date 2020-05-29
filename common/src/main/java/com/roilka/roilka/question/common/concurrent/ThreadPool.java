@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadFactory;
 /**
  * @ClassName ThreadPool
  * @Description TODO
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/3/19 19:45
  **/
 public class ThreadPool {

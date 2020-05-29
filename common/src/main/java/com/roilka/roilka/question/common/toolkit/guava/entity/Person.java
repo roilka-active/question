@@ -1,4 +1,4 @@
-package com.roilka.roilka.question.common.demo.guava.entity;
+package com.roilka.roilka.question.common.toolkit.guava.entity;
 
 /**
  * @ClassName Person

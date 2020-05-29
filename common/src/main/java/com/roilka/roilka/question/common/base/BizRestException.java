@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * @ClassName BizRestException
  * @Description TODO
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2019/12/23 19:05
  **/
 public class BizRestException extends RuntimeException implements Serializable {

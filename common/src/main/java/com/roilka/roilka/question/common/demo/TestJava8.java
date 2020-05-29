@@ -3,7 +3,7 @@ package com.roilka.roilka.question.common.demo;
 /**
  * @ClassName TestJava8
  * @Description TODO
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/5/21 10:28
  **/
 public interface TestJava8 {

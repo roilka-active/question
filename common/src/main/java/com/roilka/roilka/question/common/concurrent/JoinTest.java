@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * @ClassName JoinTest
  * @Description JoinTest 加入测试
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/3/23 11:04
  **/
 public class JoinTest {

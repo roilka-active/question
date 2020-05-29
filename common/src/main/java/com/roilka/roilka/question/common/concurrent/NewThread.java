@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 /**
  * @ClassName NewThread
  * @Description 创建一个线程
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/3/20 16:12
  **/
 public class NewThread {

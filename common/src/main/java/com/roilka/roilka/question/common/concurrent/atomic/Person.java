@@ -3,7 +3,7 @@ package com.roilka.roilka.question.common.concurrent.atomic;
 /**
  * @ClassName Person
  * @Description TODO
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/4/22 18:57
  **/
 public class Person {

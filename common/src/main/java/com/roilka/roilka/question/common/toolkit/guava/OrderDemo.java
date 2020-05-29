@@ -1,14 +1,14 @@
-package com.roilka.roilka.question.common.demo.guava;
+package com.roilka.roilka.question.common.toolkit.guava;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 import com.google.common.primitives.Ints;
-import com.roilka.roilka.question.common.demo.guava.entity.Foo;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @ClassName OrderDemo

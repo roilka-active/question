@@ -1,4 +1,4 @@
-package com.roilka.roilka.question.common.demo.guava;/**
+package com.roilka.roilka.question.common.toolkit.guava;/**
  * @Title: ${file_name}
  * @Package ${package_name}
  * @Description: ${todo}
@@ -14,7 +14,7 @@ package com.roilka.roilka.question.common.demo.guava;/**
  **/
 public interface CacheService {
     // 存方法
-    void setCommonCache(String key,Object value);
+    void setCommonCache(String key, Object value);
     //
     Object getFromCommonCache(String key);
 }

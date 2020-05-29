@@ -5,7 +5,7 @@ import org.springframework.context.support.GenericApplicationContext;
 /**
  * @ClassName GetBeanCustom
  * @Description TODO
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/4/16 11:06
  **/
 public class GetBeanCustom {

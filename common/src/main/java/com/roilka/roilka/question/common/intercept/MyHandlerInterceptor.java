@@ -5,7 +5,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 /**
  * @ClassName MyHandlerInterceptor
  * @Description TODO
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/4/22 11:25
  **/
 public class MyHandlerInterceptor implements HandlerInterceptor {

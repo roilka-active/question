@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 /**
  * @ClassName ExecutorsTest
  * @Description changyou测试
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/4/10 14:40
  **/
 public class ExecutorsTest {

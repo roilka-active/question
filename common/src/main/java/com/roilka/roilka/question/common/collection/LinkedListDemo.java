@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 /**
  * @ClassName LinkedListDemo
  * @Description TODO
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/4/26 11:24
  **/
 public class LinkedListDemo {

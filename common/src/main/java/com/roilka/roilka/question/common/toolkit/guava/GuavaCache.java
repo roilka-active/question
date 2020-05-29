@@ -1,4 +1,4 @@
-package com.roilka.roilka.question.common.demo.guava;/**
+package com.roilka.roilka.question.common.toolkit.guava;/**
  * @Title: ${file_name}
  * @Package ${package_name}
  * @Description: ${todo}

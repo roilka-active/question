@@ -1,4 +1,4 @@
-package com.roilka.roilka.question.common.demo.guava;
+package com.roilka.roilka.question.common.toolkit.guava;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;

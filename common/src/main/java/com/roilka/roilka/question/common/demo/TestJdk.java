@@ -7,7 +7,7 @@ import java.util.Optional;
 /**
  * @ClassName TestJdk
  * @Description TODO
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/5/21 10:48
  **/
 public class TestJdk implements TestJava8,TestJdk8A {

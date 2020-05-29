@@ -11,7 +11,7 @@ import java.util.Enumeration;
 /**
  * @ClassName OsUtils
  * @Description TODO
- * @Author zhanghui1
+ * @Author 75six
  * @Date 2020/1/6 14:52
  **/
 @Slf4j
