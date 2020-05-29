@@ -6,6 +6,7 @@
   - 底层的内存管理，页面置换算法
   - 一般的缓存服务，memcache\redis之类
   - 部分业务场景
+  - 当hashmap数据量过大，可以采用这种方式实现热点缓存
 
 
 - [实操代码](https://github.com/roilka-active/question/blob/master/common/src/main/java/com/roilka/roilka/question/common/collection/LRU.java)
