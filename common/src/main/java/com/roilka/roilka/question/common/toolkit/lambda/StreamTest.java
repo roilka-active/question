@@ -1,8 +1,6 @@
 package com.roilka.roilka.question.common.toolkit.lambda;
 
 import lombok.extern.slf4j.Slf4j;
-import training.entity.GreetingService;
-import training.entity.MathOperate;
 
 /**
  * @ClassName StreamTest
@@ -16,9 +14,6 @@ public class StreamTest {
     public static void main(String[] args) {
         StreamTest t = new StreamTest();
         t.sendRedpacket();
-        MathOperate addition = (int a, int b) -> a + b;
-        GreetingService service =(s) -> System.out.println(s);
-        service.sayMessage("哈哈");
     }
 
     //    @Async("asyncServiceExecutor")

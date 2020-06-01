@@ -12,6 +12,7 @@ package com.roilka.roilka.question.common.toolkit.lambda.dataobject;/**
  * @Author 75six
  * @Date 2020/5/29 20:16
  **/
+@FunctionalInterface
 public interface HasParamNoReturn {
     void sayMessage(String message);
 }

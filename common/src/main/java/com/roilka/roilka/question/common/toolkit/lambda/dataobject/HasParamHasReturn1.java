@@ -13,8 +13,7 @@ package com.roilka.roilka.question.common.toolkit.lambda.dataobject;/**
  * @Date 2020/5/29 20:18
  **/
 @FunctionalInterface
-public interface HasParamHasReturn {
-    Integer count(Integer t1,Integer t2);
-    int hashCode();
-    String toString();
+public interface HasParamHasReturn1 {
+    String[] count(Integer t1);
+
 }
