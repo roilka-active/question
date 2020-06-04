@@ -1,10 +1,14 @@
 package com.roilka.roilka.question.common.toolkit.lambda;
 
+import com.roilka.roilka.question.common.concurrent.atomic.Person;
 import com.roilka.roilka.question.common.entity.Employee;
+import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,7 +21,60 @@ import java.util.stream.Stream;
 public class ForTest {
     public static void main(String[] args) {
 
-        testReduce();
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(1);
+        list.add(2);
+        list.add(1);
+        list.add(3);
+        Person person = new Person("zhansan", 12);
+        Map<String, Object> describe = null;
+
+            describe = objectToMap(person);
+
+
+        System.out.println(describe);
+        list = null;
+        if (list == null){
+            System.out.println("我是空");
+        }
+
+
+
+//        list = list.stream().distinct().collect(Collectors.toList());
+//        testForeach(null);
+//        testReduce();
+    }
+
+    public static <T> Map<String, Object> objectToMap(T t) {
+        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
+
+        Class<?> aClass = t.getClass();
+        try {
+            Field name = aClass.getDeclaredField("name");
+            Method toString = aClass.getDeclaredMethod("toString", null);
+            Object invoke = toString.invoke(t, null);
+            System.out.println(invoke);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        Field[] declaredFields = aClass.getDeclaredFields();
+        Map<String, Object> collect = Arrays.stream(declaredFields).collect(Collectors.toMap(Field::getName, field -> {
+            field.setAccessible(true);
+            try {
+                return field.get(t);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                return null;
+            }
+
+        }));
+        return collect;
     }
 
     /**
@@ -27,13 +84,14 @@ public class ForTest {
      */
     private static void testForeach(List<Employee> userList) {
         userList = initList(10);
+        userList = userList.stream().distinct().collect(Collectors.toList());
         for (int i = 1; i < 2; i++) {
             System.out.println("--------------------第" + i + "次");
             long t1 = System.nanoTime();
 
-            testLambda(userList);
+//            testLambda(userList);
             long t2 = System.nanoTime();
-            testForeach(userList);
+//            testForeach(userList);
             long t3 = System.nanoTime();
             System.out.println("lambda---" + (t2 - t1) / 1000 + "μs");
             System.out.println("增强for--" + (t3 - t2) / 1000 + "μs");
@@ -92,6 +150,7 @@ public class ForTest {
         for (int i = 0; i < size; i++) {
             userList.add(new Employee(i));
         }
+        userList.add(new Employee(1));
         return userList;
     }
 

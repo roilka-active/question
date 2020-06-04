@@ -1,11 +1,14 @@
 package com.roilka.roilka.question.common.concurrent.atomic;
 
+import lombok.Data;
+
 /**
  * @ClassName Person
  * @Description TODO
  * @Author 75six
  * @Date 2020/4/22 18:57
  **/
+@Data
 public class Person {
 
     private String name;
