@@ -22,4 +22,5 @@ public class RestTestController {
     public String getName(){
       return "hello";
     }
+
 }

@@ -8,6 +8,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import java.lang.reflect.Field;
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -43,12 +44,27 @@ public class ObjectUtils {
 
         //通过evaluationContext.setVariable可以在上下文中设定变量。
         EvaluationContext context = new StandardEvaluationContext();
-        context.setVariable("user","黎明");
+        context.setVariable("user", "黎明");
 
         //解析表达式，如果表达式是一个模板表达式，需要为解析传入模板解析器上下文。
-        Expression expression = paser.parseExpression(template,new TemplateParserContext());
+        Expression expression = paser.parseExpression(template, new TemplateParserContext());
 
         //使用Expression.getValue()获取表达式的值，这里传入了Evalution上下文，第二个参数是类型参数，表示返回值的类型。
-        System.out.println(expression.getValue(context,String.class));
+        System.out.println(expression.getValue(context, String.class));
+
+        String pl = "你好呀，";
+        String[] arr ={};
+        System.out.println(getMsg(pl,arr));
+        String[] arr1 ={"zhangsan","","sd"};
+        System.out.println(getMsg(pl,arr1));
+        String[] arr2 ={"zhangsan",null,"sd"};
+        System.out.println(getMsg(pl,arr2));
+        getMsg(pl, new String[]{"s"});
+    }
+
+    public static String getMsg(String placeHolder, String... arg) {
+        MessageFormat messageFormat = new MessageFormat(placeHolder);
+
+        return messageFormat.format(arg);
     }
 }
