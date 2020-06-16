@@ -3,6 +3,7 @@ package com.roilka.roilka.question.api.rabbitmq;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -16,6 +17,6 @@ public class RabbitMqDemo {
     private AmqpTemplate amqpTemplate;
     public static void main(String[] args) {
         ConnectionFactory connectionFactory = new CachingConnectionFactory();
-        
+        AmqpTemplate amqpTemplate = new RabbitTemplate();
     }
 }
