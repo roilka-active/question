@@ -2,6 +2,8 @@ package training.tools.lambda;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
+import training.entity.GreetingService;
+import training.entity.MathOperate;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -18,6 +20,9 @@ public class StreamTest {
     public static void main(String[] args) {
         StreamTest t = new StreamTest();
         t.sendRedpacket();
+        MathOperate addition = (int a, int b) -> a + b;
+        GreetingService service =(s) -> System.out.println(s);
+        service.sayMessage("哈哈");
     }
 
     //    @Async("asyncServiceExecutor")

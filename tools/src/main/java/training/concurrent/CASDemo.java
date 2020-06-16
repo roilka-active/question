@@ -36,5 +36,8 @@ public class CASDemo {
         Object[] b = a;
         a[0] = "ds";
         b[0] = 32;
+        new Thread(()->{
+           System.out.println();
+        });
     }
 }

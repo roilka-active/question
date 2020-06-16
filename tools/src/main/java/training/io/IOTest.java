@@ -32,11 +32,13 @@ public class IOTest {
     static final String prePath = "D:\\GIT\\owner\\Manager\\training\\tools\\src\\main\\resources";
     public static void main(String[] args) throws IOException {
 
+        long start = System.currentTimeMillis();
         String path =System.getProperty("java.class.path");
         FileInputStream fin = new FileInputStream( prePath + "\\sensi_words.txt");
         DataInputStream din = new DataInputStream(fin);
         double s = din.readDouble();
         SysTools._out(s,"这是文件里读出来的：");
+        SysTools._out(System.currentTimeMillis() - start,"消耗时间：");
         FileReader fileReader = new FileReader(new File(prePath + "\\sensi_words.txt"));
         SysTools._out(fin.getFD(),"文件描述");
 
