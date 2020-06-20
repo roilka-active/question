@@ -16,6 +16,8 @@ package training.spring;/**
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
 import training.spring.config.MainConfig;
 
 /**
@@ -23,8 +25,11 @@ import training.spring.config.MainConfig;
  * @description ioc测试
  * @date 2020/5/28
  */
+@Service
+@Configuration
 public class IOCTest {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
+
     }
 }

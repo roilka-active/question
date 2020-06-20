@@ -29,6 +29,8 @@ public class MapTest {
         System.out.println("当前消耗时间：" + (end - start) + "毫秒");
 
         LinkedHashMap as = new LinkedHashMap();
+        ConcurrentHashMap<Object, Object> concurrentHashMap = new ConcurrentHashMap<>();
+        concurrentHashMap.put(1,1);
     }
     public static StringBuffer addNum(String a, String b) {
         char[] maxChars = new char[Math.max(a.length(), b.length())];
