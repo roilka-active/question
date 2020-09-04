@@ -183,21 +183,27 @@ public class DateUtils {
     }
 
     public static void main(String[] args) {
-        List<Integer> a = new ArrayList<>();
-        a.add(1);
-        a.add(2);
-        a.add(3);
-        List<Integer> b = new ArrayList<>();
-        b.add(4);
-        b.add(2);
-        b.add(3);
+//        List<Integer> a = new ArrayList<>();
+//        a.add(1);
+//        a.add(2);
+//        a.add(3);
+//        List<Integer> b = new ArrayList<>();
+//        b.add(4);
+//        b.add(2);
+//        b.add(3);
 //        a.removeAll(b);
 //        System.out.println("a:"+a+"/r b:"+b);
 //        b.removeAll(a);
 //        System.out.println("a:"+a+"/r b:"+b);
-      List<Integer> re =   a.stream().filter(r -> r >2).collect(Collectors.toList());
-        System.out.println(re);
-        System.out.println(getAfterHour(new Date(), 20000));
+//      List<Integer> re =   a.stream().filter(r -> r >2).collect(Collectors.toList());
+//        System.out.println(re);
+//        System.out.println(getAfterHour(new Date(), 20000));
+        String t = "1601395200000";
+        Date date = new Date(Long.valueOf(t));
+        System.out.println(date);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String format = simpleDateFormat.format(t);
+        System.out.println(format);
     }
 
     /**

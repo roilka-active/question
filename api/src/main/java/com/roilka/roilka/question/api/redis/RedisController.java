@@ -54,7 +54,9 @@ public class RedisController {
     @GetMapping("/testStringAndHash")
     @ResponseBody
     public Map<String, Object> testStringAndHash() {
+        redisTemplate.watch("key1");
         redisTemplate.opsForValue().set("key1", "Value1");
+        List exec = redisTemplate.exec();
         //注意这里使用的是JDK的序列化器，所以Redis 保存时不是整数，不能运算
         redisTemplate.opsForValue().set("int_key", "1");
         stringRedisTemplate.opsForValue().set("int", "1");

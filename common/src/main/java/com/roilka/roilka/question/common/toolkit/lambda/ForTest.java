@@ -1,9 +1,7 @@
 package com.roilka.roilka.question.common.toolkit.lambda;
 
-import com.roilka.roilka.question.common.concurrent.atomic.Person;
+import com.roilka.roilka.question.common.javabase.concurrent.atomic.Person;
 import com.roilka.roilka.question.common.entity.Employee;
-import org.apache.commons.beanutils.BeanUtils;
-import org.springframework.util.CollectionUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

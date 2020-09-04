@@ -1,5 +1,7 @@
 package com.roilka.roilka.question.common.utils;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -123,5 +125,16 @@ public class JsonConvertUtils {
         } catch (IOException e) {
             return null;
         }
+    }
+
+    public static void main(String[] args) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("a","d");
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add(jsonObject);
+        jsonArray.stream().forEach(r ->{
+
+        });
+        System.out.println(jsonObject instanceof JSONObject);
     }
 }

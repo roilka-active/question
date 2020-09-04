@@ -1,13 +1,11 @@
 package com.roilka.roilka.question.common.utils.demo;
 
-import com.roilka.roilka.question.common.concurrent.entity.Hello;
-import com.roilka.roilka.question.common.concurrent.entity.HelloWorld;
+import com.roilka.roilka.question.common.javabase.concurrent.entity.HelloWorld;
 import org.springframework.cglib.beans.ImmutableBean;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.FixedValue;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
-import org.springframework.util.Assert;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -30,6 +28,7 @@ public class CglibTest {
         List<Integer> bList = aList.stream().collect(Collectors.toList());
         bList.remove(1);
         System.out.println(3|9);
+        testFixedValue();
     }
 
     public static void testMethodInterceptor(){

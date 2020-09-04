@@ -1,6 +1,6 @@
 package com.roilka.roilka.question.common.utils;
 
-import com.roilka.roilka.question.common.concurrent.entity.Hello;
+import com.roilka.roilka.question.common.javabase.concurrent.entity.Hello;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
