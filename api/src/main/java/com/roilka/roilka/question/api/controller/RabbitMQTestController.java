@@ -2,6 +2,7 @@ package com.roilka.roilka.question.api.controller;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;
+import com.roilka.roilka.question.api.annotation.RedisLockable;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -41,6 +42,7 @@ public class RabbitMQTestController {
     @Autowired
     private ConnectionFactory connectionFactory;
 
+    @RedisLockable(key = "#redis.getName",timeout = 120)
     @GetMapping("/getName")
     @ApiOperation("测试获取名字")
     public String getName() {

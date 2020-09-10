@@ -1,5 +1,6 @@
 package com.roilka.roilka.question.api.redis;
 
+import com.roilka.roilka.question.api.annotation.RedisLockable;
 import com.roilka.roilka.question.domain.entity.Animal;
 import com.roilka.roilka.question.domain.entity.BussinessPerson;
 import io.swagger.annotations.Api;
@@ -43,17 +44,20 @@ public class RedisController {
     private StringRedisTemplate stringRedisTemplate = null;
 
     @ApiOperation(value = "redis 测试String和Hash")
-    @GetMapping("/testStringAndHash/{a}")
+    @GetMapping("/testBean/{a}")
     @ResponseBody
     public Object testBean(@PathVariable("a") String a) {
         bussinessPerson.service(a);
         return null;
     }
 
+    @RedisLockable(value = "#redis.test",timeout = 5,key = "#redis.test")
     @ApiOperation(value = "redis 测试String和Hash")
     @GetMapping("/testStringAndHash")
     @ResponseBody
     public Map<String, Object> testStringAndHash() {
+        stringRedisTemplate.setEnableTransactionSupport(true);
+        redisTemplate.setEnableTransactionSupport(true);
         redisTemplate.watch("key1");
         redisTemplate.opsForValue().set("key1", "Value1");
         List exec = redisTemplate.exec();

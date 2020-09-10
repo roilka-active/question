@@ -9,11 +9,16 @@ package com.roilka.roilka.question.common.javabase.concurrency;
 public class Main_concurrent {
 
     public static void main(String[] args) {
-        Test01_Concurrent test01Concurrent = new Test01_Concurrent();
-        Thread thread = new Thread(() -> test01Concurrent.lockA());
-        Thread thread1 = new Thread(() -> Test01_Concurrent.lockB());
-        thread.start();
-        thread1.start();
+//        Test01_Concurrent test01Concurrent = new Test01_Concurrent();
+//        Thread thread = new Thread(() -> test01Concurrent.lockA());
+//        Thread thread1 = new Thread(() -> Test01_Concurrent.lockB());
+//        thread.start();
+//        thread1.start();
+
+        Object o = new Object();
+        synchronized (o){
+            o = null;
+        }
 
     }
 }
