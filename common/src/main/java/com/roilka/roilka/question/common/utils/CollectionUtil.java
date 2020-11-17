@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.CollectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -284,7 +286,8 @@ public class CollectionUtil {
     }
 
     /**
-     *  将集合按照subSize 拆分成若干个子集合
+     * 将集合按照subSize 拆分成若干个子集合
+     *
      * @param list
      * @param subSize
      * @param <T>
@@ -300,11 +303,33 @@ public class CollectionUtil {
             return result;
         }
 
-        for (int start = 0, end = start + subSize; start < orgSize; start += subSize,end +=subSize) {
+        for (int start = 0, end = start + subSize; start < orgSize; start += subSize, end += subSize) {
 
             result.add(list.subList(start, end > orgSize ? orgSize : end));
         }
         return result;
+    }
+
+    /**
+     * 大批量集合删除部分元素工具类
+     *
+     * @param source
+     * @param dest
+     * @param <T>
+     * @return
+     */
+    public static <T> Collection<T> removeAll(Collection<T> source, Collection<T> dest) {
+        return CollectionUtil.removeAll(source, dest, LinkedHashSet::new);
+    }
+
+    public static <T, R extends Collection<T>> Collection<T> removeAll(Collection<T> source, Collection<T> dest, Supplier<R> supplier) {
+        if (CollectionUtils.isEmpty(source)) {
+            return Collections.EMPTY_LIST;
+        }
+        LinkedList<T> ts = new LinkedList<>(source);
+        HashSet<T> targetSet = new HashSet<>(dest);
+        return source.stream().filter(r -> !targetSet.contains(r)).collect(Collectors.toCollection(supplier));
+
     }
 
     public static void main(String[] args) {
@@ -338,13 +363,14 @@ public class CollectionUtil {
         HashMap map1 = new HashMap();
         map1.put(1, "fd");
         String s = "I feel unhappy!";
-        int  h = 0;
-         h = (h = s.hashCode()) ^ (h >>> 16);
-         System.out.println(h);
+        int h = 0;
+        h = (h = s.hashCode()) ^ (h >>> 16);
+        System.out.println(h);
         ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap<>();
     }
+
     @Data
-    public static class Bean{
+    public static class Bean {
         private int code;
         private String name;
         private Integer score;
