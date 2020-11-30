@@ -14,14 +14,8 @@ package training.tools.utils;/**
  * Modified By:
  */
 
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
-import javafx.scene.text.Text;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author zhanghui
@@ -289,16 +283,16 @@ public class StringUtils {
      * 根据数字生成一个定长的字符串，长度不够前面补0
      *
      * @param num       数字
-     * @param fixdlenth 字符串长度
+     * @param fixedLength 字符串长度
      * @return 定长的字符串
      */
-    public static String generateFixdLengthString(long num, int fixedlenth) {
+    public static String generateFixdLengthString(long num, int fixedLength) {
         StringBuffer sb = new StringBuffer();
         String strNum = String.valueOf(num);
-        if (fixedlenth - strNum.length() >= 0) {
-            sb.append(generateZeroString(fixedlenth - strNum.length()));
+        if (fixedLength - strNum.length() >= 0) {
+            sb.append(generateZeroString(fixedLength - strNum.length()));
         } else {
-            throw new RuntimeException("将数字" + num + "转化为长度为" + fixedlenth
+            throw new RuntimeException("将数字" + num + "转化为长度为" + fixedLength
                     + "的字符串发生异常！");
         }
         sb.append(strNum);

@@ -1,12 +1,8 @@
-package training.tools.lambda;
+package training.jdk.lambda;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Async;
 import training.entity.GreetingService;
 import training.entity.MathOperate;
-
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName StreamTest

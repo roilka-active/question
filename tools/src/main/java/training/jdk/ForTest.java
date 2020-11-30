@@ -1,4 +1,4 @@
-package training.tools.lambda;
+package training.jdk;
 
 import training.tools.javase.Employee;
 

@@ -1,4 +1,4 @@
-package training.tools.lambda;
+package training.jdk.lambda;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
