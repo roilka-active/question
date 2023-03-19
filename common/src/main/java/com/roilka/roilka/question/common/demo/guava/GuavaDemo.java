@@ -4,10 +4,15 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ComparisonChain;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName GuavaDemo
@@ -17,7 +22,9 @@ import java.util.Optional;
  **/
 public class GuavaDemo {
     public static void main(String[] args) {
-        testObject();
+//        testObject();
+//        useAndIgnoreNull("aa");
+        compareTo();
     }
 
     /**
@@ -27,19 +34,26 @@ public class GuavaDemo {
      * @param <T>
      * @return
      */
-    public static <T> Object useAndIgnoreNull(T obj) {
-        List<T> list = new ArrayList<>();
+    public static <T> Object useAndIgnoreNull(String obj) {
+        List<String> list = new ArrayList<>();
         list.add(obj);
-        Optional<List> optional = Optional.ofNullable(list);
 
         String a = null;
         String b = "d";
         // 当a为null时，则返回b
         String ss = Optional.ofNullable(a).orElse(b);
         System.out.println(ss);
+
+        Optional<List> optional = Optional.ofNullable(null);
+        List t2 = optional.orElse(Lists.newArrayList("bb"));
+
+        System.out.println(t2);
         return ss;
     }
 
+    /**
+     * 前置条件判断
+     */
     public static void testPreconditions() {
         String a = "a";
         String b = null;
@@ -80,12 +94,32 @@ public class GuavaDemo {
 
     }
 
+    /**
+     *  比较链
+     * @return
+     */
     public static int compareTo(){
         String a = "a";
         String b = null;
         String c = "a";
         String d = "d";
-        ComparisonChain.start().compare(a, d).compare(d, a).result();
+        ComparisonChain.start()
+                .compare(a, d).
+                compare(d, a).result();
+        AA aa = new AA();
+        aa.setAa("11");
+        aa.setBb("22");
+        AA bb = new AA();
+        bb.setAa("11");
+        bb.setBb("223");
+        ArrayList<AA> aas = Lists.newArrayList(aa, bb);
+        Map<String, String> collect = aas.stream().collect(Collectors.toMap(AA::getAa, AA::getBb, (r1, r2) -> r2));
+        System.out.println(collect);
         return 0;
+    }
+    @Data
+    static class AA{
+        String aa;
+        String bb;
     }
 }

@@ -1,14 +1,22 @@
 package com.roilka.roilka.question.common.utils;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
+import com.roilka.roilka.question.common.utils.demo.Inventor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.URLDecoder;
 import java.net.UnknownHostException;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +29,7 @@ import java.util.Map;
 @Slf4j
 public class MDCUtils implements AutoCloseable {
 
+    private static final Logger logger = LoggerFactory.getLogger(MDCUtils.class);
     /**
      * 链路跟踪编号
      */
@@ -69,13 +78,35 @@ public class MDCUtils implements AutoCloseable {
         try {
             localHostName = InetAddress.getLocalHost().getHostName();
         } catch (UnknownHostException e) {
-            log.error("获取本机HostName异常:{}", e.getMessage(), e);
+            logger.error("获取本机HostName异常:{}", e.getMessage(), e);
         }
     }
 
     public static void main(String[] args) {
-        addRemoteEndpoint("");
-        addRemoteName("");
+//        addRemoteEndpoint("");
+//        addRemoteName("");
+        Date date1 = new Date(1675699201000L);
+        System.out.println(date1.toString());
+
+        Date date2 = new Date(1676390399000L);
+        System.out.println(date2.toString());
+
+        // 创建  Inventor 对象
+        GregorianCalendar c = new GregorianCalendar();
+        c.set(1856, 7, 9);
+        Inventor tesla = new Inventor("Nikola Tesla", c.getTime(), "Serbian");
+        // 1 定义解析器
+        ExpressionParser parser = new SpelExpressionParser();
+        // 指定表达式
+        Expression exp = parser.parseExpression("birthdate");
+        // 在 tesla对象上解析
+        String name = (String) exp.getValue(tesla);
+        System.out.println(name); // Nikola Tesla
+
+        exp = parser.parseExpression("name == 'Nikola Tesla'");
+        // 在 tesla对象上解析并指定返回结果
+        boolean result = exp.getValue(tesla, Boolean.class);
+        System.out.println(result); // true
     }
 
     @Value("${spring.application.name}")

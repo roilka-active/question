@@ -22,14 +22,14 @@ public class Generator {
             AutoGenerator mpg = new AutoGenerator();
             // 全局配置
             GlobalConfig gc = new GlobalConfig();
-            gc.setOutputDir("D://generator");
+            gc.setOutputDir("/Users/zhanghui/Docs/zto-work/");
             gc.setFileOverride(true);
             gc.setActiveRecord(false);
             gc.setEnableCache(false);// XML 二级缓存
             gc.setBaseResultMap(true);// XML ResultMap
             gc.setBaseColumnList(false);// XML columList
             gc.setOpen(false);
-            gc.setAuthor("changyou");
+            gc.setAuthor("zhanghui");
             // 自定义文件命名，注意 %s 会自动填充表实体属性！
             gc.setMapperName("%sMapper");
             gc.setXmlName("%sMapper");
@@ -39,16 +39,16 @@ public class Generator {
             DataSourceConfig dsc = new DataSourceConfig();
             dsc.setDbType(DbType.MYSQL);
             dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-            dsc.setUsername("root");
-            dsc.setPassword("111111");
+            dsc.setUsername("happy_work_common_rw");
+            dsc.setPassword("CaV6Yz6z6Q%s3#%yzI2oB");
             dsc.setUrl(
-                    "jdbc:mysql://127.0.0.1:3306/zhihu?useSSL=false&serverTimezone=UTC");
+                    "jdbc:mysql://10.9.15.250:3306/happy_work_common?useSSL=false&serverTimezone=UTC");
             mpg.setDataSource(dsc);
             // 策略配置
             StrategyConfig strategy = new StrategyConfig();
             strategy.setTablePrefix("");// 此处可以修改为您的表前缀
             strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-            strategy.setInclude(new String[] { "history_today" }); // 需要生成的表
+            strategy.setInclude(new String[] { "evidence_scene_config"}); // 需要生成的表
             // strategy.setExclude(new String[]{"test"}); // 排除生成的表
             // 自定义实体父类
             //        strategy.setSuperEntityClass("top.ibase4j.core.base.BaseModel");
@@ -85,7 +85,7 @@ public class Generator {
             //        mpg.setCfg(cfg);
             // 包配置
             PackageConfig pc = new PackageConfig();
-            pc.setParent("com.roilka.roilka");
+            pc.setParent("com.zto.hwo");
             pc.setEntity("dao");
             pc.setMapper("dao");
             pc.setXml("mapper");

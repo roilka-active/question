@@ -68,6 +68,8 @@
                 <artifactId>guava</artifactId>
                 <version>22.0</version>
             </dependency>
+
+
             <!-- SpringCloud 版本依赖-->
             <!-- <dependency>
                  <groupId>org.springframework.cloud</groupId>

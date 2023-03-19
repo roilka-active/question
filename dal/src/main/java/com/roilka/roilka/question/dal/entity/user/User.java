@@ -17,6 +17,8 @@ public class User {
     private Long id;
     @Value("user_name_default")
     private String userName;
+    @Value("user_code")
+    private String userCode;
     @Value("note_default")
     private String note;
 }
