@@ -1,8 +1,5 @@
 package training.tools.utils;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -50,7 +47,8 @@ public class AesUtil {
         IvParameterSpec iv = new IvParameterSpec(OFFSET.getBytes());//使用CBC模式，需要一个向量iv，可增加加密算法的强度
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
         byte[] encrypted = cipher.doFinal(data.getBytes(ENCODING));
-        return new BASE64Encoder().encode(encrypted);//此处使用BASE64做转码。
+//        return new BASE64Encoder().encode(encrypted);//此处使用BASE64做转码。
+        return null;
     }
 
     /**
@@ -67,9 +65,10 @@ public class AesUtil {
         SecretKeySpec skeySpec = new SecretKeySpec(KEY.getBytes("UTF-8"), ALGORITHM);
         IvParameterSpec iv = new IvParameterSpec(OFFSET.getBytes());//使用CBC模式，需要一个向量iv，可增加加密算法的强度
         cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
-        byte[] buffer = new BASE64Decoder().decodeBuffer(data);
-        byte[] encrypted = cipher.doFinal(buffer);
-        return new String(encrypted, ENCODING);//此处使用BASE64做转码。
+//        byte[] buffer = new BASE64Decoder().decodeBuffer(data);
+//        byte[] encrypted = cipher.doFinal(buffer);
+//        return new String(encrypted, ENCODING);//此处使用BASE64做转码。
+        return null;
     }
 
     public static void main(String[] args) throws Exception {

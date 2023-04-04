@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  **/
 public class TestDemo {
     public static void main(String[] args) {
-        List<EmployeeInfo> resultlist = new ArrayList<>();
+        /*List<EmployeeInfo> resultlist = new ArrayList<>();
         EmployeeInfo info = new EmployeeInfo();
         info.setId(1);
         info.setAccountId(3);
@@ -35,6 +35,9 @@ public class TestDemo {
         resultlist.add(info);
 
         Map<Integer, EmployeeInfo> map = resultlist.stream().collect(Collectors.toMap(EmployeeInfo::getAccountId, Function.identity(), (key, val) -> val));
-        SysTools._out(map);
+        SysTools._out(map);*/
+
+        int i = Math.abs("139.226.12.65".hashCode()) % 100;
+        System.out.println(i);
     }
 }

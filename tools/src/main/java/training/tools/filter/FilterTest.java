@@ -15,11 +15,14 @@ package training.tools.filter;/**
  */
 
 
-import sun.applet.Main;
+import com.google.common.collect.Lists;
+import lombok.Data;
 import training.tools.utils.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author zhanghui
@@ -30,14 +33,30 @@ import java.util.List;
 public class FilterTest {
 
     public static void main(String[] args) throws Exception {
-        FilterTest filterTest = new FilterTest();
+        /*FilterTest filterTest = new FilterTest();
         long start = System.currentTimeMillis();
         String ss = filterTest.filterKeyWord("");
         long end = System.currentTimeMillis();
         long sub = end - start;
         System.out.println("本次过滤总消耗："+sub+"毫秒");
-        System.out.println(ss);
+        System.out.println(ss);*/
+
+        List<User> users = Lists.newArrayList();
+        users.add(new User(0, "zhangsan", 40));
+        users.add(new User(1, "lisi", 30));
+        users.add(new User(2, null, 90));
+        users.add(new User(3, "zhangsan", 20));
+        users.add(new User(4, "wangwu", 18));
+        users.add(new User(5, "zhaoliu", 9));
+        users.add(new User(2, null, 30));
+        users.sort(Comparator.comparing(User::getAge));
+        final String collect = users.stream().map(User::getName).collect(Collectors.joining("-"));
+        users.stream().filter(record -> record.getName() == null).forEach(re -> re.setName(collect));
+        System.out.println(collect);
+        System.out.println(users);
+
     }
+
 
     public String filterKeyWord(String content) throws Exception {
         List<String> testSuit = new ArrayList<String>();
@@ -98,5 +117,41 @@ public class FilterTest {
 
     void say(Object object) {
         System.out.println(object);
+    }
+}
+@Data
+class User{
+    private int id;
+    private String name;
+    private int age;
+
+    public User(int id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
